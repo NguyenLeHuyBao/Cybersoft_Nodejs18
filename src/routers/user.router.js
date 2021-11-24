@@ -13,7 +13,7 @@ userRouter.post("/upload-avatar", uploadAvatar);
 userRouter.get("/", findAllUser);
 userRouter.get("/:id", findDetailUser);
 userRouter.post("/", createUser);
-userRouter.post("/:id", updateUser);
+userRouter.put("/:id", updateUser);
 userRouter.delete("/:id", removeUser);
 module.exports = {
   userRouter,
