@@ -1,0 +1,29 @@
+{
+  "name": "project-movie",
+  "version": "1.0.0",
+  "description": "Cybersoft project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NguyenLeHuyBao/Cybersoft_Nodejs18.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NguyenLeHuyBao/Cybersoft_Nodejs18/issues"
+  },
+  "homepage": "https://github.com/NguyenLeHuyBao/Cybersoft_Nodejs18#readme",
+
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
