@@ -1,5 +1,5 @@
 const { User } = require("../models/");
-
+const bcryptjs = require("bcryptjs");
 const findAllUser = async (req, res) => {
   try {
     const userList = await User.findAll({
@@ -25,13 +25,14 @@ const findDetailUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, password, phone, role } = req.body;
+    const { name, email, password, phone } = req.body;
+    const salt = bcryptjs.genSaltSync(10);
+    const hashPassword = bcryptjs.hashSync(password, salt);
     const newUser = await User.create({
       name,
       email,
-      password,
+      password: hashPassword,
       phone,
-      role,
     });
     res.status(201).send(newUser);
   } catch (error) {
