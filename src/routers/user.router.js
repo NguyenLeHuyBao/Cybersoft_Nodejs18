@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const userRouter = Router();
+const { User } = require("../models/");
 const {
   findAllUser,
   createUser,
@@ -14,10 +15,10 @@ const {
 // http://localhost:7000/api/v1/users
 userRouter.post("/upload-avatar", uploadAvatar);
 userRouter.get("/", findAllUser);
-userRouter.get("/:id", [checkExist], findDetailUser);
+userRouter.get("/:id", [checkExist(User)], findDetailUser);
 userRouter.post("/", createUser);
-userRouter.put("/:id", [checkExist], updateUser);
-userRouter.delete("/:id", [checkExist], removeUser);
+userRouter.put("/:id", [checkExist(User)], updateUser);
+userRouter.delete("/:id", [checkExist(User)], removeUser);
 module.exports = {
   userRouter,
 };
