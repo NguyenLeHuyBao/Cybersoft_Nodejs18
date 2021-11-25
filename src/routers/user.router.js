@@ -8,13 +8,16 @@ const {
   findDetailUser,
   updateUser,
 } = require("../controllers/user.controller");
+const {
+  checkExist,
+} = require("../middlewares/validation/check-exist.middleware");
 // http://localhost:7000/api/v1/users
 userRouter.post("/upload-avatar", uploadAvatar);
 userRouter.get("/", findAllUser);
-userRouter.get("/:id", findDetailUser);
+userRouter.get("/:id", [checkExist], findDetailUser);
 userRouter.post("/", createUser);
-userRouter.put("/:id", updateUser);
-userRouter.delete("/:id", removeUser);
+userRouter.put("/:id", [checkExist], updateUser);
+userRouter.delete("/:id", [checkExist], removeUser);
 module.exports = {
   userRouter,
 };

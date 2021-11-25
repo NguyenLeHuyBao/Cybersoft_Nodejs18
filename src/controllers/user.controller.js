@@ -62,14 +62,10 @@ const removeUser = async (req, res) => {
   try {
     const { id } = req.params;
     const userDelete = await User.findByPk(id);
-    if (userDelete) {
-      await User.destroy({
-        where: { id },
-      });
-      res.status(200).send({ message: "Xóa thành công" });
-    } else {
-      res.status(404).send({ message: "Id không đúng. Không thể xóa" });
-    }
+    await User.destroy({
+      where: { id },
+    });
+    res.status(200).send({ message: "Xóa thành công", userDelete });
   } catch (error) {
     res.status(500).send({ message: error });
   }
