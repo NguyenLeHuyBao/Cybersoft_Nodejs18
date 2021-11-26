@@ -72,7 +72,9 @@ const removeUser = async (req, res) => {
   }
 };
 
-const uploadAvatar = async (req, res) => {};
+const uploadAvatar = async (req, res) => {
+  res.send("upload avatar");
+};
 
 module.exports = {
   findAllUser,

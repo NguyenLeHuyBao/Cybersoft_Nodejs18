@@ -15,8 +15,15 @@ const {
 const {
   authenticate,
 } = require("../middlewares/auth/vertify.token.middleware");
+const {
+  uploadImage,
+} = require("../middlewares/upload/upload-image.middleware");
 // http://localhost:7000/api/v1/users
-userRouter.post("/upload-avatar", uploadAvatar);
+userRouter.post(
+  "/upload-avatar",
+  [authenticate, uploadImage("avatar")],
+  uploadAvatar
+);
 userRouter.get("/", findAllUser);
 userRouter.get("/:id", [checkExist(User)], findDetailUser);
 userRouter.post("/", createUser);

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue: "CLIENT",
       },
+      avatar: DataTypes.STRING,
     },
     {
       sequelize,
