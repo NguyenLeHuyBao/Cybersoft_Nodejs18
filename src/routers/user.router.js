@@ -14,6 +14,7 @@ const {
 } = require("../middlewares/validation/check-exist.middleware");
 const {
   authenticate,
+  authorize,
 } = require("../middlewares/auth/vertify.token.middleware");
 const {
   uploadImage,
@@ -28,7 +29,11 @@ userRouter.get("/", findAllUser);
 userRouter.get("/:id", [checkExist(User)], findDetailUser);
 userRouter.post("/", createUser);
 userRouter.put("/:id", [checkExist(User)], updateUser);
-userRouter.delete("/:id", [checkExist(User), authenticate], removeUser);
+userRouter.delete(
+  "/:id",
+  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],
+  removeUser
+);
 module.exports = {
   userRouter,
 };

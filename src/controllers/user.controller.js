@@ -1,5 +1,7 @@
 const { User } = require("../models/");
 const bcryptjs = require("bcryptjs");
+const { config } = require("../config");
+const jwt = require("jsonwebtoken");
 const findAllUser = async (req, res) => {
   try {
     const userList = await User.findAll({
@@ -25,7 +27,7 @@ const findDetailUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, role } = req.body;
     const salt = bcryptjs.genSaltSync(10);
     const hashPassword = bcryptjs.hashSync(password, salt);
     const newUser = await User.create({
@@ -33,6 +35,7 @@ const createUser = async (req, res) => {
       email,
       password: hashPassword,
       phone,
+      role,
     });
     res.status(201).send(newUser);
   } catch (error) {
@@ -53,7 +56,16 @@ const updateUser = async (req, res) => {
       }
     );
     const detailUser = await User.findByPk(id);
-    res.send(200).status(detailUser);
+    if (detailUser) {
+      const payload = {
+        id: detailUser.id,
+        email: detailUser.email,
+        role: detailUser.role,
+      };
+      const secretKey = "fake-secret";
+      const token = jwt.sign(payload, secretKey);
+      res.status(200).send({ detailUser, token });
+    }
   } catch (error) {
     res.status(500).send(error);
   }
@@ -73,7 +85,16 @@ const removeUser = async (req, res) => {
 };
 
 const uploadAvatar = async (req, res) => {
-  res.send("upload avatar");
+  const { user, file } = req;
+  const userUploadImage = await User.findOne({
+    where: {
+      id: user.id,
+    },
+  });
+
+  userUploadImage.avatar = config.server.host + file.path;
+  await userUploadImage.save();
+  res.send({ user, link: userUploadImage.avatar });
 };
 
 module.exports = {

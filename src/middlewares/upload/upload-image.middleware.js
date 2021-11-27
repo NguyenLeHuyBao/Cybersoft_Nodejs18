@@ -1,8 +1,5 @@
 const multer = require("multer");
-const {
-  getExtensionFileHelper,
-} = require("../../../public/utils/getExtension");
-
+const { getExtensionFileHelper } = require("../../utils/getExtension");
 const uploadImage = (typeImage) => {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -10,7 +7,7 @@ const uploadImage = (typeImage) => {
     },
     filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-      cb(null, file.originalname + "-" + uniqueSuffix);
+      cb(null, uniqueSuffix + "-" + file.originalname);
     },
   });
   const upload = multer({
