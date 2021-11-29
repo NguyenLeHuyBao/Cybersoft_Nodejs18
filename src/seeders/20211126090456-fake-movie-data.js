@@ -15,7 +15,7 @@ module.exports = {
       "Movies",
       [
         {
-          id: "1",
+          id: 1,
           name: "Iron man 1",
           alias: "Iron man 1",
           poster: "link hinh",
@@ -27,7 +27,7 @@ module.exports = {
           updatedAt: "2021-11-19 11:36:14",
         },
         {
-          id: "2",
+          id: 2,
           name: "Iron man 2",
           alias: "Iron man 2",
           poster: "link hinh",
