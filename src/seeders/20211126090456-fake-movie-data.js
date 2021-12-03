@@ -2,15 +2,6 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-     */
     await queryInterface.bulkInsert(
       "Movies",
       [
@@ -33,7 +24,7 @@ module.exports = {
           poster: "link hinh",
           trailer: "link video",
           duration: "180",
-          desc: "phim có người sắt , giàu lắm",
+          desc: "phim có người sắt , giàu lắm phan 2",
           dateShow: "2021-11-19",
           createdAt: "2021-11-19 11:36:14",
           updatedAt: "2021-11-19 11:36:14",
@@ -44,12 +35,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
     await queryInterface.bulkDelete("Movies", null, {});
   },
 };

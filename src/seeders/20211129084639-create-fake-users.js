@@ -2,6 +2,7 @@
 const bcryptjs = require("bcryptjs");
 const fakeUserList = [
   {
+    id: 1,
     name: "Bao Nguyen",
     email: "baonguyen@gmail.com",
     password: "123456",
@@ -12,6 +13,7 @@ const fakeUserList = [
     avatar: "link hinh",
   },
   {
+    id: 2,
     name: "S1mple",
     email: "s1m@gmail.com",
     password: "123456",
@@ -22,6 +24,7 @@ const fakeUserList = [
     avatar: "link hinh",
   },
   {
+    id: 3,
     name: "b1t",
     email: "b1t@gmail.com",
     password: "123456",

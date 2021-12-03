@@ -3,6 +3,7 @@ const { rootRoutter } = require("./src/routers/root.router");
 const app = express();
 const path = require("path");
 const { config } = require("./src/config");
+const db = require("./src/models");
 // const port = 7000;
 app.use(express.json());
 
@@ -19,6 +20,14 @@ app.get("/hello", (req, res) => {
 app.use("/api/v1", rootRoutter);
 
 const port = config.server.port;
-app.listen(port, () => {
-  console.log("App run on port " + port);
-});
+db.sequelize
+  //sync để đồng bộ model trên code với db
+  .sync()
+  .then((result) => {
+    app.listen(port, () => {
+      console.log("App run on port " + port);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
