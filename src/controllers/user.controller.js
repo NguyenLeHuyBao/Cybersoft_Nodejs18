@@ -57,16 +57,6 @@ const updateUser = async (req, res) => {
       }
     );
     const detailUser = await User.findByPk(id);
-    if (detailUser) {
-      const payload = {
-        id: detailUser.id,
-        email: detailUser.email,
-        role: detailUser.role,
-      };
-      const secretKey = "fake-secret";
-      const token = jwt.sign(payload, secretKey);
-      res.status(200).send({ detailUser, token });
-    }
   } catch (error) {
     res.status(500).send(error);
   }

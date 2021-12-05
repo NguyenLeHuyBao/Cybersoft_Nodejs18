@@ -7,6 +7,20 @@ const db = require("./src/models");
 // const port = 7000;
 app.use(express.json());
 
+//set up graphql
+const { graphqlHTTP } = require("express-graphql");
+const { graphqlSchema } = require("./src/graphql/schema");
+const { graphqlResolvers } = require("./src/graphql/resolver");
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphqlSchema,
+    rootValue: graphqlResolvers,
+    graphiql: true,
+  })
+);
+
 //set up static file
 const pathPublicDirectory = path.join(__dirname, "./public");
 //cho phep duong dan localhost:7000 truy cap truc tiep toi thu muc public
