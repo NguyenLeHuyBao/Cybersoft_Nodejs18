@@ -4,6 +4,7 @@ const {
   User,
   Movie,
   Ticket,
+  Cinema_movie,
   sequelize,
 } = require("../models");
 
@@ -58,9 +59,27 @@ const getAllTickets = async (req, res) => {
         },
       ],
     });
-    // const ticketList = await ticket.findAll();
-    console.log(ticketList);
     res.status(200).send(ticketList);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+};
+
+const getAllCinemaMovies = async (req, res) => {
+  try {
+    const cinemaMovieList = await Cinema_movie.findAll({
+      include: [
+        {
+          model: Cinema,
+          attributes: ["name", "address"],
+        },
+        {
+          model: Movie,
+          attributes: ["name"],
+        },
+      ],
+    });
+    res.status(200).send(cinemaMovieList);
   } catch (error) {
     res.status(500).send({ error });
   }
@@ -70,4 +89,5 @@ module.exports = {
   getListCineplex,
   getListCinema,
   getAllTickets,
+  getAllCinemaMovies,
 };
