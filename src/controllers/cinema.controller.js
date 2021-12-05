@@ -6,6 +6,7 @@ const {
   Ticket,
   Cinema_movie,
   Showtime,
+  Seat,
   sequelize,
 } = require("../models");
 
@@ -102,10 +103,30 @@ const getAllShowtimes = async (req, res) => {
   }
 };
 
+const getAllSeats = async (req, res) => {
+  try {
+    const seatList = await Seat.findAll({
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: Showtime,
+          attributes: ["startTime", "cinemaId"],
+        },
+      ],
+    });
+    res.status(200).send(seatList);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+};
+
 module.exports = {
   getListCineplex,
   getListCinema,
   getAllTickets,
   getAllCinemaMovies,
   getAllShowtimes,
+  getAllSeats,
 };

@@ -1,0 +1,116 @@
+"use strict";
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert(
+      "Seats",
+      [
+        {
+          id: 1,
+          name: "1F",
+          status: false,
+          price: 200000,
+          type: "Ghế đơn",
+          showtimeId: 1,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 2,
+          name: "2F",
+          status: false,
+          price: 200000,
+          type: "Ghế đơn",
+          showtimeId: 1,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 3,
+          name: "3F",
+          status: false,
+          price: 200000,
+          type: "Ghế đơn",
+          showtimeId: 1,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 4,
+          name: "1G",
+          status: true,
+          price: 400000,
+          type: "Ghế đôi",
+          showtimeId: 1,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 5,
+          name: "3G",
+          status: false,
+          price: 400000,
+          type: "Ghế đôi",
+          showtimeId: 1,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 6,
+          name: "5G",
+          status: true,
+          price: 600000,
+          type: "Ghế nằm",
+          showtimeId: 2,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 7,
+          name: "8G",
+          status: false,
+          price: 600000,
+          type: "Ghế nằm",
+          showtimeId: 2,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 8,
+          name: "1H",
+          status: true,
+          price: 600000,
+          type: "Ghế nằm",
+          showtimeId: 2,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 9,
+          name: "5H",
+          status: false,
+          price: 200000,
+          type: "Ghế đơn",
+          showtimeId: 3,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+        {
+          id: 10,
+          name: "6G",
+          status: true,
+          price: 200000,
+          type: "Ghế đơn",
+          showtimeId: 3,
+          createdAt: "2021-11-19 11:36:14",
+          updatedAt: "2021-11-19 11:36:14",
+        },
+      ],
+      {}
+    );
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete("Seats", null, {});
+  },
+};
