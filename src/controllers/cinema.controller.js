@@ -47,7 +47,6 @@ const getListCinema = async (req, res) => {
 const getAllTickets = async (req, res) => {
   try {
     const ticketList = await Ticket.findAll({
-      attributes: ["id"],
       include: [
         {
           model: User,
@@ -59,11 +58,11 @@ const getAllTickets = async (req, res) => {
         },
       ],
     });
-    // const ticketList = await Ticket.findAll();
-    // console.log(ticketList);
+    // const ticketList = await ticket.findAll();
+    console.log(ticketList);
     res.status(200).send(ticketList);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ error });
   }
 };
 
