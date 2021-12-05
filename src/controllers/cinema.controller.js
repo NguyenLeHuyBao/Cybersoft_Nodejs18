@@ -5,6 +5,7 @@ const {
   Movie,
   Ticket,
   Cinema_movie,
+  Showtime,
   sequelize,
 } = require("../models");
 
@@ -85,9 +86,26 @@ const getAllCinemaMovies = async (req, res) => {
   }
 };
 
+const getAllShowtimes = async (req, res) => {
+  try {
+    const showTimeList = await Showtime.findAll({
+      include: [
+        {
+          model: Cinema,
+          attributes: ["name", "address"],
+        },
+      ],
+    });
+    res.status(200).send(showTimeList);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+};
+
 module.exports = {
   getListCineplex,
   getListCinema,
   getAllTickets,
   getAllCinemaMovies,
+  getAllShowtimes,
 };
