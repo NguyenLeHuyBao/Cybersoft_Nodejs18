@@ -1,23 +1,82 @@
 const { Movie } = require("../models");
-const bcryptjs = require("bcryptjs");
 const getAllMovie = async (req, res) => {
   try {
     const movieList = await Movie.findAll();
-    res.status(200).send(movieList);
+    res.status(200).send({ message: "Successfully get all movies", movieList });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error);
   }
 };
 
-const uploadMovie = (req, res) => {
-  const token = req.header("token");
+const getMovieDetail = async (req, res) => {
+  try {
+    const { movieId } = req.params;
+    const movieDetail = await Movie.findOne({ where: { id: movieId } });
+    res
+      .status(200)
+      .send({ message: "Successfully get movie detail", movieDetail });
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
 
-const deleteMovie = (req, res) => {};
+const uploadMovie = async (req, res) => {
+  try {
+    const { name, alias, poster, trailer, duration, desc, dateShow } = req.body;
+    const newMovie = await Movie.create({
+      name,
+      alias,
+      poster,
+      trailer,
+      duration,
+      desc,
+      dateShow,
+    });
+    res
+      .status(201)
+      .send({ message: "Successfully upload new movie", newMovie });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-const getMovieDetail = (req, res) => {};
+const updateMovie = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, alias, poster, trailer, duration, desc, dateShow } = req.body;
+    await Movie.update(
+      {
+        name,
+        alias,
+        poster,
+        trailer,
+        duration,
+        dateShow,
+      },
+      {
+        where: { id },
+      }
+    );
+    const updateMovie = await Movie.findByPk(id);
+    res.status(200).send({ message: "Successfully update movie", updateMovie });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-const updateMovie = (req, res) => {};
+const deleteMovie = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const movieDelete = await Movie.findByPk(id);
+    await Movie.destroy({
+      where: { id },
+    });
+    res.status(200).send({ message: "Succesfully delete movie", movieDelete });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   getAllMovie,
   getMovieDetail,

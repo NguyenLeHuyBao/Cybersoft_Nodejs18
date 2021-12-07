@@ -34,14 +34,16 @@ app.get("/hello", (req, res) => {
 app.use("/api/v1", rootRoutter);
 
 const port = config.server.port;
-db.sequelize
-  //sync để đồng bộ model trên code với db
-  .sync()
-  .then((result) => {
-    app.listen(port, () => {
-      console.log("App run on port " + port);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// db.sequelize
+//   //sync để đồng bộ model trên code với db
+//   .sync()
+//   .then((result) => {
+
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+app.listen(port, () => {
+  console.log("App run on port " + port);
+});

@@ -1,7 +1,6 @@
 const { User } = require("../models/");
 const bcryptjs = require("bcryptjs");
 const { config } = require("../config");
-const jwt = require("jsonwebtoken");
 
 const findAllUser = async (req, res) => {
   try {
@@ -10,7 +9,7 @@ const findAllUser = async (req, res) => {
         exclude: ["password"],
       },
     });
-    res.status(200).send(userList);
+    res.status(200).send({ message: "Successfully get all users", userList });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -20,7 +19,9 @@ const findDetailUser = async (req, res) => {
   try {
     const { id } = req.params;
     const userDetail = await User.findByPk(id);
-    res.status(200).send(userDetail);
+    res
+      .status(200)
+      .send({ message: "Successfully find detail user", userDetail });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -38,7 +39,7 @@ const createUser = async (req, res) => {
       phone,
       role,
     });
-    res.status(201).send(newUser);
+    res.status(201).send({ message: "Successfully create new user", newUser });
   } catch (error) {
     res.status(500).send(error);
   }
