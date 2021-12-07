@@ -19,7 +19,6 @@ const {
 const {
   uploadImage,
 } = require("../middlewares/upload/upload-image.middleware");
-// http://localhost:7000/api/v1/users
 userRouter.post(
   "/upload-avatar",
   [authenticate, uploadImage("avatar")],

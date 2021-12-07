@@ -25,28 +25,6 @@ const getListCineplex = async (req, res) => {
   }
 };
 
-const getListCinema = async (req, res) => {
-  try {
-    const listCinema = await Cinema.findAll({
-      include: [
-        {
-          model: Cineplex,
-        },
-      ],
-    });
-
-    // const querySQL = `
-    //   select * from Cinemas
-    // `;
-    // const [result, metadata] = await sequelize.query(querySQL);
-
-    // res.status(200).send({ result, metadata });
-    res.status(200).send(listCinema);
-  } catch (error) {
-    res.status(500).send({ message: error });
-  }
-};
-
 const getAllTickets = async (req, res) => {
   try {
     const ticketList = await Ticket.findAll({
@@ -122,6 +100,63 @@ const getAllSeats = async (req, res) => {
   }
 };
 
+//CRUD
+const getListCinema = async (req, res) => {
+  try {
+    const listCinema = await Cinema.findAll({
+      include: [
+        {
+          model: Cineplex,
+        },
+      ],
+    });
+
+    // const querySQL = `
+    //   select * from Cinemas
+    // `;
+    // const [result, metadata] = await sequelize.query(querySQL);
+
+    // res.status(200).send({ result, metadata });
+    res
+      .status(200)
+      .send({ message: "Successfully get list cinemas", listCinema });
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+};
+
+const getCinemaDetail = (req, res) => {
+  try {
+    res.send("worked");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const uploadCinema = (req, res) => {
+  try {
+    res.send("worked");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const updateCinema = (req, res) => {
+  try {
+    res.send("worked");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const deleteCinema = (req, res) => {
+  try {
+    res.send("worked");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   getListCineplex,
   getListCinema,
@@ -129,4 +164,8 @@ module.exports = {
   getAllCinemaMovies,
   getAllShowtimes,
   getAllSeats,
+  getCinemaDetail,
+  uploadCinema,
+  updateCinema,
+  deleteCinema,
 };

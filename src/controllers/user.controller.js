@@ -49,27 +49,16 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, phone, password, email, role } = req.body;
-    if (password) {
-      const salt = bcryptjs.genSaltSync(10);
-      const hashPassword = bcryptjs.hashSync(password, salt);
-      await User.update(
-        { name, email, phone, role, password: hashPassword },
-        {
-          where: {
-            id,
-          },
-        }
-      );
-    } else {
-      await User.update(
-        { name, email, phone, role },
-        {
-          where: {
-            id,
-          },
-        }
-      );
-    }
+    const salt = bcryptjs.genSaltSync(10);
+    const hashPassword = bcryptjs.hashSync(password, salt);
+    await User.update(
+      { name, email, phone, role, password: hashPassword },
+      {
+        where: {
+          id,
+        },
+      }
+    );
     const detailUser = await User.findByPk(id);
     res.status(200).send(detailUser);
   } catch (error) {
