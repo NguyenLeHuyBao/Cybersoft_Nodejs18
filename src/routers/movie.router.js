@@ -17,7 +17,7 @@ const {
 const movieRouter = Router();
 
 movieRouter.get("/", getAllMovie);
-movieRouter.get("/:movieId", [checkExist(Movie)], getMovieDetail);
+movieRouter.get("/:id", [checkExist(Movie)], getMovieDetail);
 movieRouter.post(
   "/",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],

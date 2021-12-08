@@ -1,31 +1,11 @@
 const { User } = require("../models/");
 const bcryptjs = require("bcryptjs");
 const { config } = require("../config");
+const { adminTaskHelper } = require("../utils/CRUD");
 
-const findAllUser = async (req, res) => {
-  try {
-    const userList = await User.findAll({
-      attributes: {
-        exclude: ["password"],
-      },
-    });
-    res.status(200).send({ message: "Successfully get all users", userList });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const findAllUser = adminTaskHelper.getAllTask(User);
 
-const findDetailUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const userDetail = await User.findByPk(id);
-    res
-      .status(200)
-      .send({ message: "Successfully find detail user", userDetail });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const findDetailUser = adminTaskHelper.getDetailTask(User);
 
 const createUser = async (req, res) => {
   try {
@@ -66,18 +46,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const removeUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const userDelete = await User.findByPk(id);
-    await User.destroy({
-      where: { id },
-    });
-    res.status(200).send({ message: "Xóa thành công", userDelete });
-  } catch (error) {
-    res.status(500).send({ message: error });
-  }
-};
+const removeUser = adminTaskHelper.deleteTask(User);
 
 const uploadAvatar = async (req, res) => {
   const { user, file } = req;

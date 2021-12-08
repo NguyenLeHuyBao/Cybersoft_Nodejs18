@@ -9,6 +9,7 @@ const {
   Seat,
   sequelize,
 } = require("../models");
+const { adminTaskHelper } = require("../utils/CRUD");
 
 const getListCineplex = async (req, res) => {
   try {
@@ -125,17 +126,7 @@ const getListCinema = async (req, res) => {
   }
 };
 
-const getCinemaDetail = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const cinemaDetail = await Cinema.findByPk(id);
-    res
-      .status(200)
-      .send({ message: "Successfully find cinema detail", cinemaDetail });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const getCinemaDetail = adminTaskHelper.getDetailTask(Cinema);
 
 const uploadCinema = async (req, res) => {
   try {
@@ -169,15 +160,7 @@ const updateCinema = async (req, res) => {
   }
 };
 
-const deleteCinema = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Cinema.destroy({ where: { id } });
-    res.status(200).send({ message: "Successfully deleted" });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const deleteCinema = adminTaskHelper.deleteTask(Cinema);
 
 module.exports = {
   getListCineplex,
