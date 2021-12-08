@@ -125,33 +125,55 @@ const getListCinema = async (req, res) => {
   }
 };
 
-const getCinemaDetail = (req, res) => {
+const getCinemaDetail = async (req, res) => {
   try {
-    res.send("worked");
+    const { id } = req.params;
+    const cinemaDetail = await Cinema.findByPk(id);
+    res
+      .status(200)
+      .send({ message: "Successfully find cinema detail", cinemaDetail });
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-const uploadCinema = (req, res) => {
+const uploadCinema = async (req, res) => {
   try {
-    res.send("worked");
+    const { name, address, image, cineplexId } = req.body;
+    const newCinema = await Cinema.create({
+      name,
+      address,
+      image,
+      cineplexId,
+    });
+    res
+      .status(201)
+      .send({ message: "Successfully create new cinema", newCinema });
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-const updateCinema = (req, res) => {
+const updateCinema = async (req, res) => {
   try {
-    res.send("worked");
+    const { id } = req.params;
+    const { name, address, image, cineplexId } = req.body;
+    await Cinema.update(
+      { name, address, image, cineplexId },
+      { where: { id } }
+    );
+    const cinemaUpdate = await Cinema.findByPk(id);
+    res.status(200).send(cinemaUpdate);
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-const deleteCinema = (req, res) => {
+const deleteCinema = async (req, res) => {
   try {
-    res.send("worked");
+    const { id } = req.params;
+    await Cinema.destroy({ where: { id } });
+    res.status(200).send({ message: "Successfully deleted" });
   } catch (error) {
     res.status(500).send(error);
   }

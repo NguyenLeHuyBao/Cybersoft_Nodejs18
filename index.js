@@ -4,7 +4,6 @@ const app = express();
 const path = require("path");
 const { config } = require("./src/config");
 const db = require("./src/models");
-// const port = 7000;
 app.use(express.json());
 
 //set up graphql

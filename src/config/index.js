@@ -1,5 +1,5 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const path = require("path");
+require("dotenv").config();
 
 // const server = {
 //   host: "http://localhost:7000/",
@@ -11,7 +11,7 @@ const server = {
   port: process.env.PORT || 7000,
 };
 
-config = {
+const config = {
   server,
 };
 
