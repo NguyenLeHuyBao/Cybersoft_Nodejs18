@@ -26,8 +26,16 @@ userRouter.post(
 );
 userRouter.get("/", findAllUser);
 userRouter.get("/:id", [checkExist(User)], findDetailUser);
-userRouter.post("/", createUser);
-userRouter.put("/:id", [checkExist(User)], updateUser);
+userRouter.post(
+  "/",
+  [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
+  createUser
+);
+userRouter.put(
+  "/:id",
+  [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
+  updateUser
+);
 userRouter.delete(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],

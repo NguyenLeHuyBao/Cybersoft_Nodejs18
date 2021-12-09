@@ -7,44 +7,9 @@ const findAllUser = adminTaskHelper.getAllTask(User);
 
 const findDetailUser = adminTaskHelper.getDetailTask(User);
 
-const createUser = async (req, res) => {
-  try {
-    const { name, email, password, phone, role } = req.body;
-    const salt = bcryptjs.genSaltSync(10);
-    const hashPassword = bcryptjs.hashSync(password, salt);
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashPassword,
-      phone,
-      role,
-    });
-    res.status(201).send({ message: "Successfully create new user", newUser });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const createUser = adminTaskHelper.uploadTask(User);
 
-const updateUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, phone, password, email, role } = req.body;
-    const salt = bcryptjs.genSaltSync(10);
-    const hashPassword = bcryptjs.hashSync(password, salt);
-    await User.update(
-      { name, email, phone, role, password: hashPassword },
-      {
-        where: {
-          id,
-        },
-      }
-    );
-    const detailUser = await User.findByPk(id);
-    res.status(200).send(detailUser);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const updateUser = adminTaskHelper.updateTask(User);
 
 const removeUser = adminTaskHelper.deleteTask(User);
 

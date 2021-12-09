@@ -5,49 +5,9 @@ const getAllMovie = adminTaskHelper.getAllTask(Movie);
 
 const getMovieDetail = adminTaskHelper.getDetailTask(Movie);
 
-const uploadMovie = async (req, res) => {
-  try {
-    const { name, alias, poster, trailer, duration, desc, dateShow } = req.body;
-    const newMovie = await Movie.create({
-      name,
-      alias,
-      poster,
-      trailer,
-      duration,
-      desc,
-      dateShow,
-    });
-    res
-      .status(201)
-      .send({ message: "Successfully upload new movie", newMovie });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const uploadMovie = adminTaskHelper.uploadTask(Movie);
 
-const updateMovie = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, alias, poster, trailer, duration, desc, dateShow } = req.body;
-    await Movie.update(
-      {
-        name,
-        alias,
-        poster,
-        trailer,
-        duration,
-        dateShow,
-      },
-      {
-        where: { id },
-      }
-    );
-    const updateMovie = await Movie.findByPk(id);
-    res.status(200).send({ message: "Successfully update movie", updateMovie });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const updateMovie = adminTaskHelper.updateTask(Movie);
 
 const deleteMovie = adminTaskHelper.deleteTask(Movie);
 
