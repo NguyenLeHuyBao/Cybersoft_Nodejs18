@@ -128,37 +128,9 @@ const getListCinema = async (req, res) => {
 
 const getCinemaDetail = adminTaskHelper.getDetailTask(Cinema);
 
-const uploadCinema = async (req, res) => {
-  try {
-    const { name, address, image, cineplexId } = req.body;
-    const newCinema = await Cinema.create({
-      name,
-      address,
-      image,
-      cineplexId,
-    });
-    res
-      .status(201)
-      .send({ message: "Successfully create new cinema", newCinema });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const uploadCinema = adminTaskHelper.uploadTask(Cinema);
 
-const updateCinema = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, address, image, cineplexId } = req.body;
-    await Cinema.update(
-      { name, address, image, cineplexId },
-      { where: { id } }
-    );
-    const cinemaUpdate = await Cinema.findByPk(id);
-    res.status(200).send(cinemaUpdate);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+const updateCinema = adminTaskHelper.updateTask(Cinema);
 
 const deleteCinema = adminTaskHelper.deleteTask(Cinema);
 

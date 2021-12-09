@@ -1,5 +1,4 @@
 const { User } = require("../models/");
-const bcryptjs = require("bcryptjs");
 const { config } = require("../config");
 const { adminTaskHelper } = require("../utils/CRUD");
 

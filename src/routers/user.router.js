@@ -24,8 +24,16 @@ userRouter.post(
   [authenticate, uploadImage("avatar")],
   uploadAvatar
 );
-userRouter.get("/", findAllUser);
-userRouter.get("/:id", [checkExist(User)], findDetailUser);
+userRouter.get(
+  "/",
+  [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
+  findAllUser
+);
+userRouter.get(
+  "/:id",
+  [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
+  findDetailUser
+);
 userRouter.post(
   "/",
   [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
