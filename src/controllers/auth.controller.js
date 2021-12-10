@@ -18,7 +18,7 @@ const signIn = async (req, res) => {
           role: user.role,
         };
         const secretKey = "fake-secret";
-        const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 });
+        const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 * 12 });
         res.status(200).send({ message: "Đăng nhập thành công", token });
       } else {
         res.status(400).send({ message: "Mật khẩu không đúng" });
