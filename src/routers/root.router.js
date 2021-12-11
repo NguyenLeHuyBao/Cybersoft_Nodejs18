@@ -6,6 +6,7 @@ const { cinemaRouter } = require("./cinema.router");
 const { movieRouter } = require("./movie.router");
 const { cineplexRouter } = require("./cineplex.router");
 const { seatRouter } = require("./seat.router");
+const { showtimeRouter } = require("./showtime.router");
 
 // http://localhost:7000/api/v1/users
 rootRoutter.use("/users", userRouter);
@@ -19,6 +20,8 @@ rootRoutter.use("/movie", movieRouter);
 rootRoutter.use("/cineplex", cineplexRouter);
 // http://localhost:7000/api/v1/seat
 rootRoutter.use("/seat", seatRouter);
+// http://localhost:7000/api/v1/showtime
+rootRoutter.use("/showtime", showtimeRouter);
 module.exports = {
   rootRoutter,
 };
