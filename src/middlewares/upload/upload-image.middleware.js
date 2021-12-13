@@ -1,10 +1,6 @@
 const multer = require("multer");
-const { getExtensionFileHelper } = require("../../utils/getExtension");
 const uploadImage = (typeImage) => {
   const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, `./public/images/${typeImage}`);
-    },
     filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       cb(null, uniqueSuffix + "-" + file.originalname);
@@ -13,13 +9,10 @@ const uploadImage = (typeImage) => {
   const upload = multer({
     storage,
     fileFilter: (req, file, cb) => {
-      const extensionImageList = ["png", "jpg", "jpeg", "gif", "webp"];
-      const extension = getExtensionFileHelper(file.originalname);
-      if (extensionImageList.includes(extension)) {
-        cb(null, true);
-      } else {
-        cb(new Error("File không hợp lệ. Không thể upload"));
+      if (!file.mimetype.match(/png|jpg|jpeg|gif/)) {
+        cb(new Error("File does not support"), false);
       }
+      cb(null, true);
     },
   });
   return upload.single(typeImage);

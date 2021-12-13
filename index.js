@@ -5,6 +5,7 @@ const path = require("path");
 const { config } = require("./src/config");
 const db = require("./src/models");
 app.use(express.json());
+const port = config.server.port;
 
 //set up graphql
 const { graphqlHTTP } = require("express-graphql");
@@ -25,14 +26,9 @@ const pathPublicDirectory = path.join(__dirname, "./public");
 //cho phep duong dan localhost:7000 truy cap truc tiep toi thu muc public
 //localhost:7000/public <==> folder public
 app.use("/public", express.static(pathPublicDirectory));
-// http://localhost:7000/hello
-app.get("/hello", (req, res) => {
-  res.send("Xin Chào Nodejs 20");
-});
 // http://localhost:7000/api/v1
 app.use("/api/v1", rootRoutter);
 
-const port = config.server.port;
 // db.sequelize
 //   //sync để đồng bộ model trên code với db
 //   .sync()
