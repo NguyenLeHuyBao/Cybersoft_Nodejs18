@@ -16,22 +16,14 @@ const {
 } = require("../middlewares/validation/check-exist.middleware");
 const movieRouter = Router();
 
-movieRouter.get(
-  "/",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
-  getAllMovie
-);
-movieRouter.get(
-  "/:id",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(Movie)],
-  getMovieDetail
-);
+movieRouter.get("/", getAllMovie);
+movieRouter.get("/:id", [checkExist(Movie)], getMovieDetail);
 movieRouter.post(
   "/",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
   uploadMovie
 );
-movieRouter.post(
+movieRouter.put(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Movie)],
   updateMovie

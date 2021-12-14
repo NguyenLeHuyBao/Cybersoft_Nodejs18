@@ -18,22 +18,14 @@ const {
 } = require("../middlewares/validation/check-exist.middleware");
 const cineplexRouter = Router();
 
-cineplexRouter.get(
-  "/",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
-  getAllCineplex
-);
-cineplexRouter.get(
-  "/:id",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Cineplex)],
-  getCineplexDetail
-);
+cineplexRouter.get("/", getAllCineplex);
+cineplexRouter.get("/:id", [checkExist(Cineplex)], getCineplexDetail);
 cineplexRouter.post(
   "/",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
   uploadCineplex
 );
-cineplexRouter.post(
+cineplexRouter.put(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Cineplex)],
   updateCineplex

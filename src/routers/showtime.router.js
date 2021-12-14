@@ -16,17 +16,9 @@ const {
 } = require("../middlewares/validation/check-exist.middleware");
 const showtimeRouter = Router();
 
-showtimeRouter.get(
-  "/",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
-  getAllShowtime
-);
+showtimeRouter.get("/", getAllShowtime);
 
-showtimeRouter.get(
-  "/:id",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Showtime)],
-  getShowtimeDetail
-);
+showtimeRouter.get("/:id", [checkExist(Showtime)], getShowtimeDetail);
 
 showtimeRouter.post(
   "/",
@@ -34,7 +26,7 @@ showtimeRouter.post(
   uploadShowtime
 );
 
-showtimeRouter.post(
+showtimeRouter.put(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Showtime)],
   updateShowtime

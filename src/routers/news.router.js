@@ -15,7 +15,7 @@ newsRouter.post("/upload-news-picture", uploadNewsPicture);
 newsRouter.get("/", getAllNews);
 newsRouter.get("/:id", getNewsDetail);
 newsRouter.post("/", uploadNews);
-newsRouter.post("/:id", updateNews);
+newsRouter.put("/:id", updateNews);
 newsRouter.delete("/:id", deleteNews);
 
 module.exports = {

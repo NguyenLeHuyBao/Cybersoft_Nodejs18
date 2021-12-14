@@ -14,11 +14,9 @@ const authenticate = (req, res, next) => {
 
 const authorize = (arrayRole) => (req, res, next) => {
   const { user } = req;
-  if (arrayRole.includes(user.role)) {
-    next();
-  } else {
+  if (!arrayRole.includes(user.role))
     res.status(403).send({ message: "Không được phép xóa" });
-  }
+  next();
 };
 module.exports = {
   authenticate,

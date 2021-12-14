@@ -34,7 +34,7 @@ cinemaRouter.post(
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
   uploadCinema
 );
-cinemaRouter.post(
+cinemaRouter.put(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Cinema)],
   updateCinema

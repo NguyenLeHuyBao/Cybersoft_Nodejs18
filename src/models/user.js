@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashPassGenerate } = require("../utils/hashPassGenerate");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -26,6 +27,22 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      hooks: {
+        beforeBulkUpdate: function (user, options) {
+          if (user.attributes.password) {
+            const hashPassword = hashPassGenerate(user.attributes.password);
+            user.attributes.password = hashPassword;
+          }
+        },
+        beforeCreate: function (user, options) {
+          if (user.isNewRecord) {
+            const hashPassword = hashPassGenerate(
+              user.getDataValue("password")
+            );
+            user.setDataValue("password", hashPassword);
+          }
+        },
+      },
     }
   );
   return User;

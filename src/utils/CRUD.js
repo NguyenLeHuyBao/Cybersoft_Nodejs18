@@ -37,13 +37,7 @@ const deleteTask = (Model) => async (req, res) => {
 
 const uploadTask = (Model) => async (req, res) => {
   try {
-    const reqBody = { ...req.body };
-    if (reqBody.password) {
-      const salt = bcryptjs.genSaltSync(10);
-      const hashPassword = bcryptjs.hashSync(reqBody.password, salt);
-      reqBody.password = hashPassword;
-    }
-    const newData = await Model.create(reqBody);
+    const newData = await Model.create(req.body);
     res.status(201).send({ message: "Upload Task Complete", newData });
   } catch (error) {
     res.status(500).send(error);
@@ -53,13 +47,7 @@ const uploadTask = (Model) => async (req, res) => {
 const updateTask = (Model) => async (req, res) => {
   try {
     const { id } = req.params;
-    const reqBody = { ...req.body };
-    if (reqBody.password) {
-      const salt = bcryptjs.genSaltSync(10);
-      const hashPassword = bcryptjs.hashSync(reqBody.password, salt);
-      reqBody.password = hashPassword;
-    }
-    await Model.update(reqBody, { where: { id } });
+    await Model.update(req.body, { where: { id } });
     const updateData = await Model.findByPk(id);
     res.status(200).send({ message: "Update Task Complete", updateData });
   } catch (error) {

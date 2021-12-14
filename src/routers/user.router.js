@@ -24,29 +24,22 @@ userRouter.post(
   [authenticate, uploadImage("avatar")],
   uploadAvatar
 );
-userRouter.get(
-  "/",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
-  findAllUser
-);
-userRouter.get(
-  "/:id",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
-  findDetailUser
-);
+userRouter.get("/", findAllUser);
+userRouter.get("/:id", [checkExist(User)], findDetailUser);
 userRouter.post(
   "/",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
+  // [authenticate, authorize("ADMIN", "SUPER_ADMIN")],
   createUser
 );
 userRouter.put(
   "/:id",
-  [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
+  // [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
+  [checkExist(User)],
   updateUser
 );
 userRouter.delete(
   "/:id",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],
+  // [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],
   removeUser
 );
 module.exports = {

@@ -14,15 +14,15 @@ rootRoutter.use("/users", userRouter);
 // http://localhost:7000/api/v1/auth
 rootRoutter.use("/auth", authRouter);
 // http://localhost:7000/api/v1/cinema
-rootRoutter.use("/cinema", cinemaRouter);
+rootRoutter.use("/cinemas", cinemaRouter);
 // http://localhost:7000/api/v1/movie
-rootRoutter.use("/movie", movieRouter);
+rootRoutter.use("/movies", movieRouter);
 // http://localhost:7000/api/v1/cineplex
-rootRoutter.use("/cineplex", cineplexRouter);
+rootRoutter.use("/cineplexes", cineplexRouter);
 // http://localhost:7000/api/v1/seat
-rootRoutter.use("/seat", seatRouter);
+rootRoutter.use("/seats", seatRouter);
 // http://localhost:7000/api/v1/showtime
-rootRoutter.use("/showtime", showtimeRouter);
+rootRoutter.use("/showtimes", showtimeRouter);
 // http://localhost:7000/api/v1/news
 rootRoutter.use("/news", newsRouter);
 module.exports = {

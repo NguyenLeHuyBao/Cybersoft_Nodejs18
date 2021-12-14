@@ -18,22 +18,14 @@ const {
   deleteSeat,
 } = require("../controllers/seat.controller");
 
-seatRouter.get(
-  "/",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
-  findAllSeat
-);
-seatRouter.get(
-  "/:id",
-  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Seat)],
-  findDetailSeat
-);
+seatRouter.get("/", findAllSeat);
+seatRouter.get("/:id", [checkExist(Seat)], findDetailSeat);
 seatRouter.post(
   "/",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"])],
   uploadSeat
 );
-seatRouter.post(
+seatRouter.put(
   "/:id",
   [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(Seat)],
   updateSeat
