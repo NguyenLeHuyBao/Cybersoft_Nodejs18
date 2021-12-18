@@ -26,13 +26,11 @@ const uploadAvatar = async (req, res) => {
     });
     userUploadImage.avatar = result.url;
     await userUploadImage.save();
-    res
-      .status(200)
-      .send({
-        message: "Sucucessfully upload avatar",
-        userUploadImage,
-        result,
-      });
+    res.status(200).send({
+      message: "Sucucessfully upload avatar",
+      userUploadImage,
+      result,
+    });
   } catch (error) {
     res.status(500).send(error);
   }

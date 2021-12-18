@@ -1,11 +1,29 @@
 const express = require("express");
-const { rootRoutter } = require("./src/routers/root.router");
-const app = express();
-const path = require("path");
 const { config } = require("./src/config");
+const { rootRoutter } = require("./src/routers/root.router");
+const path = require("path");
 const db = require("./src/models");
+const passport = require("passport");
+const facebookStrategy = require("passport-facebook-token");
+const app = express();
 app.use(express.json());
 const port = config.server.port;
+
+//send grid
+
+//set up facebook-login
+passport.use(
+  "fb-login",
+  new facebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      return done(null, profile);
+    }
+  )
+);
 
 //set up graphql
 const { graphqlHTTP } = require("express-graphql");

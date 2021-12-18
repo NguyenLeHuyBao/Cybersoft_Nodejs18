@@ -34,6 +34,7 @@ userRouter.post(
 userRouter.put(
   "/:id",
   // [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
+  [authenticate, checkExist(User)],
   [checkExist(User)],
   updateUser
 );

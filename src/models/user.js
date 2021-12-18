@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
         beforeCreate: function (user, options) {
-          if (user.isNewRecord) {
+          if (user.isNewRecord && user.getDataValue("password")) {
             const hashPassword = hashPassGenerate(
               user.getDataValue("password")
             );
