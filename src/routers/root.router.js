@@ -8,6 +8,7 @@ const { cineplexRouter } = require("./cineplex.router");
 const { seatRouter } = require("./seat.router");
 const { showtimeRouter } = require("./showtime.router");
 const { newsRouter } = require("./news.router");
+const { graphqlRouter } = require("./graphql.router");
 
 // http://localhost:7000/api/v1/users
 rootRoutter.use("/users", userRouter);
@@ -25,6 +26,8 @@ rootRoutter.use("/seats", seatRouter);
 rootRoutter.use("/showtimes", showtimeRouter);
 // http://localhost:7000/api/v1/news
 rootRoutter.use("/news", newsRouter);
+// http://localhost:7000/api/v1/graphql
+rootRoutter.use("/graphql", graphqlRouter);
 module.exports = {
   rootRoutter,
 };

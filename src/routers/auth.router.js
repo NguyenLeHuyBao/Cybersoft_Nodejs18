@@ -1,21 +1,77 @@
 const { Router } = require("express");
+const { User } = require("../models");
 const passport = require("passport");
+const facebookStrategy = require("passport-facebook-token");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const {
   signIn,
   signUp,
   resetPassword,
-  facebookLogin,
   emailSending,
+  thirdPartyLoginController,
 } = require("../controllers/auth.controller");
+const { createNewUserIfNotExist } = require("../utils/createNewUserIfNotExist");
 const authRouter = Router();
+
 // http://localhost:7000/api/v1/auth/facebook-login
+passport.use(
+  "fb-login",
+  new facebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const loginUser = await createNewUserIfNotExist(profile);
+      return done(null, loginUser);
+    }
+  )
+);
 authRouter.post(
   "/facebook-login",
   passport.authenticate("fb-login", {
     session: false,
   }),
-  facebookLogin
+  thirdPartyLoginController
 );
+// http://localhost:7000/api/v1/auth/google-login
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const loginUser = await createNewUserIfNotExist(profile);
+      return done(null, loginUser);
+    }
+  )
+);
+authRouter.get(
+  "/google-login",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: false,
+  })
+);
+authRouter.get(
+  "/google-login/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/api/v1/auth/failed",
+    session: false,
+  }),
+  thirdPartyLoginController,
+  async (req, res) => {
+    res.redirect("/api/v1/auth/success");
+  }
+);
+authRouter.get("/success", async (req, res) => {
+  res.send("successfully log in");
+});
+authRouter.get("/failed", async (req, res) => {
+  res.status(404).send("error authentification");
+});
 
 // http://localhost:7000/api/v1/auth/email-sending
 authRouter.post("/email-sending", emailSending);

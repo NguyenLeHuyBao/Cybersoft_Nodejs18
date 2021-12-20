@@ -64,30 +64,19 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const facebookLogin = async (req, res) => {
+const thirdPartyLoginController = async (req, res) => {
   try {
-    let loginUser = {};
     const { user } = req;
-    const payload = {
-      name: user.displayName,
-      email: user.emails[0].value,
-      avatar: user.photos[0].value,
-    };
-    const foundedUser = await User.findOne({
-      where: {
-        email: payload.email,
-      },
-    });
-    if (foundedUser) {
-      loginUser = foundedUser;
-    } else {
-      loginUser = await User.create(payload);
-    }
     const secretKey = process.env.JWT_SECRET_KEY;
+    const payload = {
+      id: user.dataValues.id,
+      role: user.dataValues.role,
+      email: user.dataValues.email,
+    };
     const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 * 12 });
     res
-      .status(201)
-      .send({ message: "Facebook Login successful", loginUser, token });
+      .status(200)
+      .send({ message: "Login successful", userLoginToken: token });
   } catch (error) {
     res.status(500).send({ error });
   }
@@ -113,6 +102,6 @@ module.exports = {
   signIn,
   signUp,
   resetPassword,
-  facebookLogin,
+  thirdPartyLoginController,
   emailSending,
 };
