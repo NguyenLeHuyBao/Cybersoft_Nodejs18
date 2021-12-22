@@ -6,6 +6,9 @@ const {
   getAllMovie,
   getMovieDetail,
   updateMovie,
+  getUpcomingMovie,
+  getCurrentMovie,
+  getSpecialMovie,
 } = require("../controllers/movie.controller");
 const {
   authenticate,
@@ -15,6 +18,10 @@ const {
   checkExist,
 } = require("../middlewares/validation/check-exist.middleware");
 const movieRouter = Router();
+
+movieRouter.get("/upcoming", getUpcomingMovie);
+movieRouter.get("/current", getCurrentMovie);
+movieRouter.get("/special", getSpecialMovie);
 
 movieRouter.get("/", getAllMovie);
 movieRouter.get("/:id", [checkExist(Movie)], getMovieDetail);

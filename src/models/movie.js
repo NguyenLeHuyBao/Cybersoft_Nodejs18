@@ -2,17 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      // this.belongsToMany(models.Cinema, {
-      //   through: "cinema_movies",
-      // });
-    }
+    static associate(models) {}
   }
   Movie.init(
     {
@@ -23,10 +13,29 @@ module.exports = (sequelize, DataTypes) => {
       duration: DataTypes.INTEGER,
       desc: DataTypes.TEXT,
       dateShow: DataTypes.DATE,
+      isPremiere: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      isSpecial: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
       modelName: "Movie",
+      hooks: {
+        beforeCreate: function (movie, options) {
+          const showDate = movie.getDataValue("dateShow");
+          const currentDay = Date.now();
+          if (Date.parse(showDate) - currentDay <= 0) {
+            movie.setDataValue("isPremiere", false);
+          } else {
+            movie.setDataValue("isPremiere", true);
+          }
+        },
+      },
     }
   );
   return Movie;
