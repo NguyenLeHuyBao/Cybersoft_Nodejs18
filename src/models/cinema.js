@@ -9,9 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Cineplex, {
-        foreignKey: "cineplexId",
+      this.belongsToMany(models.Movie, { through: models.Cinema_movie });
+      this.hasMany(models.Cinema_movie, {
+        foreignKey: "cinemaId",
       });
+
+      this.belongsTo(models.Cineplex, { foreignKey: "cineplexId" });
       this.hasMany(models.Showtime, {
         foreignKey: "cinemaId",
       });

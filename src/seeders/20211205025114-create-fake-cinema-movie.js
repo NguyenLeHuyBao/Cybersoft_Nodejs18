@@ -40,13 +40,13 @@ module.exports = {
           createdAt: "2021-11-19 11:36:14",
           updatedAt: "2021-11-19 11:36:14",
         },
-        {
-          id: 6,
-          cinemaId: 3,
-          movieId: 2,
-          createdAt: "2021-11-19 11:36:14",
-          updatedAt: "2021-11-19 11:36:14",
-        },
+        // {
+        //   id: 6,
+        //   cinemaId: 3,
+        //   movieId: 2,
+        //   createdAt: "2021-11-19 11:36:14",
+        //   updatedAt: "2021-11-19 11:36:14",
+        // },
       ],
       {}
     );

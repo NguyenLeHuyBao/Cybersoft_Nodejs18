@@ -9,11 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
 
     static associate({ Cinema }) {
-      //this la Cineplex
       this.hasMany(Cinema, {
         foreignKey: "cineplexId",
       });
-      // define association here
     }
   }
   Cineplex.init(

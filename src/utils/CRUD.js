@@ -1,4 +1,3 @@
-const bcryptjs = require("bcryptjs");
 const getAllTask = (Model) => async (req, res) => {
   try {
     const listObject = await Model.findAll({

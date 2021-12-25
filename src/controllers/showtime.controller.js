@@ -1,4 +1,4 @@
-const { Showtime } = require("../models");
+const { Showtime, Cinema } = require("../models");
 const { adminTaskHelper } = require("../utils/CRUD");
 const getAllShowtime = adminTaskHelper.getAllTask(Showtime);
 const getShowtimeDetail = adminTaskHelper.getDetailTask(Showtime);

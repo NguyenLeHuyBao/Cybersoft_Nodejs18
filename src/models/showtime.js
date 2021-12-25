@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Cinema, {
         foreignKey: "cinemaId",
       });
+      this.belongsTo(models.Movie, {
+        foreignKey: "movieId",
+      });
       this.hasMany(models.Seat, {
         foreignKey: "showtimeId",
       });
@@ -21,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       startTime: DataTypes.DATE,
       cinemaId: DataTypes.INTEGER,
+      movieId: DataTypes.INTEGER,
     },
     {
       sequelize,

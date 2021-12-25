@@ -9,6 +9,9 @@ const {
   getUpcomingMovie,
   getCurrentMovie,
   getSpecialMovie,
+  getCinemasByMovie,
+  getShowtimeDateByCinema,
+  getShowtimeByDate,
 } = require("../controllers/movie.controller");
 const {
   authenticate,
@@ -22,6 +25,9 @@ const movieRouter = Router();
 movieRouter.get("/upcoming", getUpcomingMovie);
 movieRouter.get("/current", getCurrentMovie);
 movieRouter.get("/special", getSpecialMovie);
+movieRouter.get("/get-cinema", getCinemasByMovie);
+movieRouter.get("/get-date", getShowtimeDateByCinema);
+movieRouter.get("/get-time", getShowtimeByDate);
 
 movieRouter.get("/", getAllMovie);
 movieRouter.get("/:id", [checkExist(Movie)], getMovieDetail);
