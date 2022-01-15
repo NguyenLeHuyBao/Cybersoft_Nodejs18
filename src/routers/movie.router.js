@@ -9,7 +9,7 @@ const {
   getUpcomingMovie,
   getCurrentMovie,
   getSpecialMovie,
-  getCinemasByMovie,
+  getCinemaListByMovie,
   getShowtimeDateByCinema,
   getShowtimeByDate,
 } = require("../controllers/movie.controller");
@@ -25,7 +25,7 @@ const movieRouter = Router();
 movieRouter.get("/upcoming", getUpcomingMovie);
 movieRouter.get("/current", getCurrentMovie);
 movieRouter.get("/special", getSpecialMovie);
-movieRouter.get("/get-cinema", getCinemasByMovie);
+movieRouter.get("/get-cinema", getCinemaListByMovie);
 movieRouter.get("/get-date", getShowtimeDateByCinema);
 movieRouter.get("/get-time", getShowtimeByDate);
 

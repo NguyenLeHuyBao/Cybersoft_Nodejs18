@@ -1,7 +1,11 @@
 const { Movie, Cinema, Showtime, Cineplex } = require("../models");
-const { adminTaskHelper } = require("../utils/CRUD");
+
+const { adminTaskHelper } = require("../services/common.service");
+const { movieService } = require("../services/movie.service");
+
 var moment = require("moment"); // require
 moment().format();
+
 const getAllMovie = adminTaskHelper.getAllTask(Movie);
 
 const getMovieDetail = adminTaskHelper.getDetailTask(Movie);
@@ -57,83 +61,37 @@ const getSpecialMovie = async (req, res) => {
   }
 };
 
-const getCinemasByMovie = async (req, res) => {
+const getCinemaListByMovie = async (req, res) => {
   try {
     const { movieId } = req.body;
-    let cinemaList = await Movie.findOne({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-      include: [
-        {
-          model: Cinema,
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
-          through: { attributes: [] },
-        },
-      ],
-      where: {
-        id: movieId,
-      },
-    });
-    cinemaList = cinemaList.Cinemas.map((cinema, index) => {
-      return {
-        id: cinema.id,
-        name: cinema.name,
-        address: cinema.address,
-        image: cinema.image,
-      };
-    });
-    res.status(200).send({ cinemaList, movieId });
+    const cinemaList = await movieService.getCinemaListByMovie(movieId);
+    res.status(200).send({ cinemaList });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error.message);
   }
 };
 
 const getShowtimeDateByCinema = async (req, res) => {
   try {
     const { movieId, cinemaId } = req.body;
-    var listDay = await Showtime.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-      where: {
-        movieId,
-        cinemaId,
-      },
-    });
-    listDay = listDay.map((item, index) => {
-      let day = moment(item.startTime).format("DD-MM-YYYY");
-      return day;
-    });
-    const uniqueListDay = listDay.filter((element, index) => {
-      return listDay.indexOf(element) === index;
-    });
-    res.status(200).send(uniqueListDay);
+    const listDays = await movieService.getDaysByCinema(movieId, cinemaId);
+    res.status(200).send({ listDays });
   } catch (error) {
-    res.status(500).send(error.toString());
+    res.status(500).send(error.message);
   }
 };
 
 const getShowtimeByDate = async (req, res) => {
   try {
     const { date, movieId, cinemaId } = req.body;
-    const listTime = [];
-    const dayFormat = moment(date, "DD-MM-YYYY").format("YYYY-MM-DD");
-    const showTimeList = await Showtime.findAll({
-      where: { movieId, cinemaId },
-    });
-    showTimeList.forEach((showTime, index) => {
-      let showTimeDay = moment(showTime.startTime).format("YYYY-MM-DD");
-      if (dayFormat === showTimeDay) {
-        let showTimeTime = moment(showTime.startTime).format("HH:mm");
-        listTime.push(showTimeTime);
-      }
-    });
+    const listTime = await movieService.getTimeListByDay(
+      date,
+      movieId,
+      cinemaId
+    );
     res.status(200).send({ listTime });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error.message);
   }
 };
 
@@ -146,7 +104,7 @@ module.exports = {
   getUpcomingMovie,
   getCurrentMovie,
   getSpecialMovie,
-  getCinemasByMovie,
+  getCinemaListByMovie,
   getShowtimeDateByCinema,
   getShowtimeByDate,
 };

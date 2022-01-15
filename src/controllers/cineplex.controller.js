@@ -1,5 +1,6 @@
 const { Cineplex } = require("../models");
-const { adminTaskHelper } = require("../utils/CRUD");
+
+const { adminTaskHelper } = require("../services/common.service");
 
 const getAllCineplex = adminTaskHelper.getAllTask(Cineplex);
 

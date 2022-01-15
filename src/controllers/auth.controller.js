@@ -1,7 +1,9 @@
 const bcryptjs = require("bcryptjs");
-const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
+
+const { User } = require("../models");
+
 const { hashPassGenerate } = require("../utils/hashPassGenerate");
 const signIn = async (req, res) => {
   try {

@@ -9,7 +9,8 @@ const {
   Seat,
   sequelize,
 } = require("../models");
-const { adminTaskHelper } = require("../utils/CRUD");
+
+const { adminTaskHelper } = require("../services/common.service");
 
 const getListCineplex = async (req, res) => {
   try {
@@ -101,7 +102,6 @@ const getAllSeats = async (req, res) => {
   }
 };
 
-//CRUD
 const getListCinema = async (req, res) => {
   try {
     const listCinema = await Cinema.findAll({

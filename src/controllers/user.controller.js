@@ -1,7 +1,8 @@
 const { User } = require("../models/");
 const { config } = require("../config");
-const { adminTaskHelper } = require("../utils/CRUD");
+const { adminTaskHelper } = require("../services/common.service");
 const { cloudinary } = require("../utils/cloudinary");
+
 const findAllUser = adminTaskHelper.getAllTask(User);
 
 const findDetailUser = adminTaskHelper.getDetailTask(User);

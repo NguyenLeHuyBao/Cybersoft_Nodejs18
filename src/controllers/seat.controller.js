@@ -1,5 +1,6 @@
 const { Seat } = require("../models/");
-const { adminTaskHelper } = require("../utils/CRUD");
+
+const { adminTaskHelper } = require("../services/common.service");
 
 const findAllSeat = adminTaskHelper.getAllTask(Seat);
 

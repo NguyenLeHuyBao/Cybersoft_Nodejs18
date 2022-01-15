@@ -6,6 +6,7 @@ const {
   uploadShowtime,
   updateShowtime,
   deleteShowtime,
+  getSeatListByShowtime,
 } = require("../controllers/showtime.controller");
 const {
   authenticate,
@@ -15,6 +16,8 @@ const {
   checkExist,
 } = require("../middlewares/validation/check-exist.middleware");
 const showtimeRouter = Router();
+
+showtimeRouter.get("/booked-seat", getSeatListByShowtime);
 
 showtimeRouter.get("/", getAllShowtime);
 
