@@ -1,8 +1,11 @@
 const { Router } = require("express");
-const { User } = require("../models");
+
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook-token");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+const { createNewUserIfNotExist } = require("../utils/createNewUserIfNotExist");
+
 const {
   signIn,
   signUp,
@@ -10,7 +13,7 @@ const {
   emailSending,
   thirdPartyLoginController,
 } = require("../controllers/auth.controller");
-const { createNewUserIfNotExist } = require("../utils/createNewUserIfNotExist");
+
 const authRouter = Router();
 
 // http://localhost:7000/api/v1/auth/facebook-login
@@ -27,6 +30,7 @@ passport.use(
     }
   )
 );
+
 authRouter.post(
   "/facebook-login",
   passport.authenticate("fb-login", {
@@ -34,6 +38,7 @@ authRouter.post(
   }),
   thirdPartyLoginController
 );
+
 // http://localhost:7000/api/v1/auth/google-login
 passport.use(
   new GoogleStrategy(
@@ -48,6 +53,7 @@ passport.use(
     }
   )
 );
+
 authRouter.get(
   "/google-login",
   passport.authenticate("google", {
@@ -55,6 +61,7 @@ authRouter.get(
     session: false,
   })
 );
+
 authRouter.get(
   "/google-login/callback",
   passport.authenticate("google", {
@@ -66,19 +73,24 @@ authRouter.get(
     res.redirect("/api/v1/auth/success");
   }
 );
+
 authRouter.get("/success", async (req, res) => {
   res.send("successfully log in");
 });
+
 authRouter.get("/failed", async (req, res) => {
   res.status(404).send("error authentification");
 });
 
 // http://localhost:7000/api/v1/auth/email-sending
 authRouter.post("/email-sending", emailSending);
+
 // http://localhost:7000/api/v1/auth/sign-in
 authRouter.post("/sign-in", signIn);
+
 // http://localhost:7000/api/v1/auth/sign-up
 authRouter.post("/sign-up", signUp);
+
 // http://localhost:7000/api/v1/auth/reset-password
 authRouter.post("/reset-password", resetPassword);
 

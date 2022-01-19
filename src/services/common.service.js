@@ -39,7 +39,7 @@ const uploadTask = (Model) => async (req, res) => {
     const newData = await Model.create(req.body);
     res.status(201).send({ message: "Upload Task Complete", newData });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.toString());
   }
 };
 

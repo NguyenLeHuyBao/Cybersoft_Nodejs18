@@ -17,7 +17,7 @@ const {
 } = require("../middlewares/validation/check-exist.middleware");
 const showtimeRouter = Router();
 
-showtimeRouter.get("/booked-seat", getSeatListByShowtime);
+showtimeRouter.get("/seats-by-showtime", getSeatListByShowtime);
 
 showtimeRouter.get("/", getAllShowtime);
 

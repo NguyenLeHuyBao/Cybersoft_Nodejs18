@@ -1,9 +1,10 @@
 "use strict";
+const Showtime = require("./showtime.js");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Seat extends Model {
     static associate(models) {
-      this.belongsTo(models.Showtime);
+      this.belongsTo(models.Showtime, { foreignKey: "showtimeId" });
 
       this.belongsToMany(models.Showtime, {
         through: models.bookedSeat,

@@ -40,13 +40,6 @@ module.exports = {
           createdAt: "2021-11-19 11:36:14",
           updatedAt: "2021-11-19 11:36:14",
         },
-        {
-          id: 6,
-          seatId: 3,
-          showtimeId: 6,
-          createdAt: "2021-11-19 11:36:14",
-          updatedAt: "2021-11-19 11:36:14",
-        },
       ],
       {}
     );

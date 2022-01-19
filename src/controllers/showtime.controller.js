@@ -14,20 +14,16 @@ const deleteShowtime = adminTaskHelper.deleteTask(Showtime);
 
 const getSeatListByShowtime = async (req, res) => {
   try {
-    const bookedSeatList = await bookedSeat.findAll({
+    const { showtimeId } = req.body;
+    const listSeat = await Seat.findAll({
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
-      include: [
-        {
-          model: Showtime,
-        },
-        {
-          model: Seat,
-        },
-      ],
+      where: {
+        showtimeId,
+      },
     });
-    res.status(200).send(bookedSeatList);
+    res.status(200).send(listSeat);
   } catch (error) {
     res.status(500).send({ error });
   }

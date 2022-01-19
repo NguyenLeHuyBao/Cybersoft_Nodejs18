@@ -4,98 +4,56 @@ const sgMail = require("@sendgrid/mail");
 
 const { User } = require("../models");
 
-const { hashPassGenerate } = require("../utils/hashPassGenerate");
+const { constants } = require("../utils/constants");
+const { authService } = require("../services/auth.service");
+
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
-    if (!user) res.status(404).send({ message: "Email không đúng" });
-    const isAuth = bcryptjs.compareSync(password, user.password);
-    if (!isAuth) res.status(400).send({ message: "Mật khẩu không đúng" });
-    const payload = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-    };
-    const secretKey = process.env.JWT_SECRET_KEY;
-    const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 * 12 });
-    res.status(200).send({ message: "Đăng nhập thành công", token });
+    const token = await authService.signIn(email, password);
+    res.status(200).send({ message: constants.Success.Login, token });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 };
 
 const signUp = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
-    const hashPassword = hashPassGenerate(password);
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashPassword,
-      phone,
-    });
-    res.status(201).send(newUser);
+    const newUser = await authService.signUp(name, email, password, phone);
+    res.status(201).send({ message: constants.Success.SignUp, newUser });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 };
 
 const resetPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
-    if (!user) res.status(404).send({ message: "Email không đúng" });
-    const passwordDefault = "123456";
-    const salt = bcryptjs.genSaltSync(10);
-    const hashPassword = bcryptjs.hashSync(passwordDefault, salt);
-    await User.update({ password: hashPassword }, { where: { email } });
+    await authService.resetPassword(email);
     res.status(200).send({
-      message: `Reset thành công, mật khẩu mới là: ${passwordDefault}`,
+      message: constants.Success.ResetPassword,
     });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 };
 
 const thirdPartyLoginController = async (req, res) => {
   try {
     const { user } = req;
-    const secretKey = process.env.JWT_SECRET_KEY;
-    const payload = {
-      id: user.dataValues.id,
-      role: user.dataValues.role,
-      email: user.dataValues.email,
-    };
-    const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 * 12 });
-    res
-      .status(200)
-      .send({ message: "Login successful", userLoginToken: token });
+    const token = await authService.thirdPartyLoginController(user);
+    res.status(200).send({ message: "Login successful", token });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error.message);
   }
 };
 
 const emailSending = async (req, res) => {
   try {
     const { email, subject, text } = req.body;
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const msg = {
-      to: email, // Change to your recipient
-      from: process.env.SENDGRID_VERIRY_SENDER, // Change to your verified sender
-      subject,
-      text,
-    };
-    await sgMail.send(msg);
-    res.status(200).send({ message: `Succesfully sent email to ${email}` });
+    await authService.emailSending(email, subject, text);
+    res.status(200).send({ message: constants.Success.EmailSending });
   } catch (error) {
     res.status(500).send({ error });
   }
