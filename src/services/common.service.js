@@ -1,11 +1,13 @@
+const { constants } = require("../utils/constants");
+
 const getAllTask = (Model) => async (req, res) => {
   try {
-    const listObject = await Model.findAll({
+    const result = await Model.findAll({
       attributes: {
-        exclude: ["password"],
+        exclude: ["password", "createdAt", "updatedAt"],
       },
     });
-    res.status(200).send({ message: "Get All Task Complete", listObject });
+    res.status(200).send({ message: constants.Success.GetAllTask, result });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -14,8 +16,11 @@ const getAllTask = (Model) => async (req, res) => {
 const getDetailTask = (Model) => async (req, res) => {
   try {
     const { id } = req.params;
-    const objectDetail = await Model.findOne({ where: { id } });
-    res.status(200).send({ message: "Get Detail Task Complete", objectDetail });
+    const result = await Model.findOne({
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+      where: { id },
+    });
+    res.status(200).send({ message: constants.Success.GetDetailTask, result });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -24,11 +29,14 @@ const getDetailTask = (Model) => async (req, res) => {
 const deleteTask = (Model) => async (req, res) => {
   try {
     const { id } = req.params;
-    const objectDelete = await Model.findByPk(id);
+    const result = await Model.findOne({
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+      where: { id },
+    });
     await Model.destroy({
       where: { id },
     });
-    res.status(200).send({ message: "Delete Task Complete", objectDelete });
+    res.status(200).send({ message: constants.Success.DeleteTask, result });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -36,8 +44,8 @@ const deleteTask = (Model) => async (req, res) => {
 
 const uploadTask = (Model) => async (req, res) => {
   try {
-    const newData = await Model.create(req.body);
-    res.status(201).send({ message: "Upload Task Complete", newData });
+    const result = await Model.create(req.body);
+    res.status(201).send({ message: constants.Success.UpdateTask, result });
   } catch (error) {
     res.status(500).send(error.toString());
   }
@@ -47,8 +55,11 @@ const updateTask = (Model) => async (req, res) => {
   try {
     const { id } = req.params;
     await Model.update(req.body, { where: { id } });
-    const updateData = await Model.findByPk(id);
-    res.status(200).send({ message: "Update Task Complete", updateData });
+    const result = await Model.findOne({
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+      where: { id },
+    });
+    res.status(200).send({ message: constants.Success.UpdateTask, result });
   } catch (error) {
     res.status(500).send(error);
   }

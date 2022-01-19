@@ -82,16 +82,16 @@ authRouter.get("/failed", async (req, res) => {
   res.status(404).send("error authentification");
 });
 
-// http://localhost:7000/api/v1/auth/email-sending
+// POST http://localhost:7000/api/v1/auth/email-sending
 authRouter.post("/email-sending", emailSending);
 
-// http://localhost:7000/api/v1/auth/sign-in
+// POST http://localhost:7000/api/v1/auth/sign-in
 authRouter.post("/sign-in", signIn);
 
-// http://localhost:7000/api/v1/auth/sign-up
+// POST http://localhost:7000/api/v1/auth/sign-up
 authRouter.post("/sign-up", signUp);
 
-// http://localhost:7000/api/v1/auth/reset-password
+// POST http://localhost:7000/api/v1/auth/reset-password
 authRouter.post("/reset-password", resetPassword);
 
 module.exports = {

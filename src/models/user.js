@@ -29,6 +29,14 @@ module.exports = (sequelize, DataTypes) => {
             user.attributes.password = hashPassword;
           }
         },
+        beforeCreate: function (user, options) {
+          if (user.isNewRecord && user.getDataValue("password")) {
+            const hashPassword = hashPassGenerate(
+              user.getDataValue("password")
+            );
+            user.setDataValue("password", hashPassword);
+          }
+        },
       },
     }
   );

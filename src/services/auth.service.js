@@ -4,7 +4,6 @@ const sgMail = require("@sendgrid/mail");
 
 const { User } = require("../models");
 
-const { helper } = require("../utils/helper");
 const { constants } = require("../utils/constants");
 
 const signIn = async (email, password) => {
@@ -33,12 +32,10 @@ const signIn = async (email, password) => {
 };
 
 const signUp = async (name, email, password, phone) => {
-  const hashPassword = helper.hashPassGenerate(password);
-
   const newUser = await User.create({
     name,
     email,
-    password: hashPassword,
+    password,
     phone,
   });
 

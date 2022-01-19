@@ -1,7 +1,9 @@
 const { User } = require("../models/");
-const { config } = require("../config");
+
 const { adminTaskHelper } = require("../services/common.service");
-const { cloudinary } = require("../utils/cloudinary");
+const { userService } = require("../services/user.service");
+
+const { constants } = require("../utils/constants");
 
 const findAllUser = adminTaskHelper.getAllTask(User);
 
@@ -16,24 +18,17 @@ const removeUser = adminTaskHelper.deleteTask(User);
 const uploadAvatar = async (req, res) => {
   try {
     const { user, file } = req;
-    const result = await cloudinary.uploader.upload(file.path, {
-      use_filename: true,
-      folder: `/Cybersoft_Nodejs18/${file.fieldname}`,
-    });
-    const userUploadImage = await User.findOne({
-      where: {
-        id: user.id,
-      },
-    });
-    userUploadImage.avatar = result.url;
-    await userUploadImage.save();
+    const { userUploadImage, result } = await userService.uploadAvatar(
+      user,
+      file
+    );
     res.status(200).send({
-      message: "Sucucessfully upload avatar",
+      message: constants.Success.UploadImage,
       userUploadImage,
       result,
     });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 };
 
