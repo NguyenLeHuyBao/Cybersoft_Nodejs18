@@ -144,7 +144,7 @@
 										"18"
 									]
 								},
-								"description": "**Description:** This api is used to for admin to delete a specific user\n\n**Requirements:** Admin access token, user Id\n\n**Usage:** Copy and paste api to use, add an admin access token in header"
+								"description": "**Description:** This api is used  to for admin to delete a specific user\n\n**Requirements:** Admin access token, user Id\n\n**Usage:** Copy and paste api to use, add an admin access token in header"
 							},
 							"response": []
 						}
