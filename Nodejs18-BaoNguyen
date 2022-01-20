@@ -1,0 +1,1845 @@
+{
+	"info": {
+		"_postman_id": "16e8d0b1-f00e-4a49-bb70-59f7bc483bc7",
+		"name": "Nodejs18- User Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "find all users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/users",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								},
+								"description": "**Description:** This api is used to get all users\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "find detail user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/users/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"users",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used to get information of a specific user\n\n**Requirements:** User Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "create user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"hohanghai\",\r\n    \"email\": \"hohanghai2@gmail.com\",\r\n    \"password\": \"aaaaaaaa\",\r\n    \"phone\": \"096201000094\",\r\n    \"role\": \"CLIENT\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/users",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								},
+								"description": "**Description:** This api is used to for admin to create new user\n\n**Requirements:** Admin access token\n\n**Usage:** Copy and paste api to use, add admin access token in headers"
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"aaaaaaaa1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/users/18",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"users",
+										"18"
+									]
+								},
+								"description": "**Description:** This api is used to for admin to update a specific user\n\n**Requirements:** Admin access token, user Id\n\n**Usage:** Copy and paste api to use, add an admin access token in header"
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/users/18",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"users",
+										"18"
+									]
+								},
+								"description": "**Description:** This api is used to for admin to delete a specific user\n\n**Requirements:** Admin access token, user Id\n\n**Usage:** Copy and paste api to use, add an admin access token in header"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "upload avatar",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "DnjcHq8Yi/Screenshot (632).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/users/upload-avatar",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"upload-avatar"
+							]
+						},
+						"description": "**Description:** This api is used for user to upload their avatar. User avatars will be stored in cloudinary\n\n**Requirements:** User access token\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movie (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get movie list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/movies",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"movies"
+									]
+								},
+								"description": "**Description:** This api is used to get all movies\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get movie detail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/movies/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"movies",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used to get a specific movie\n\n**Requirements:** movie Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload movie",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Wonder Woman\",\r\n    \"alias\": \"Wonder Woman\",\r\n    \"poster\": \"link hinh\",\r\n    \"trailer\": \"link video\",\r\n    \"duration\": \"230\",\r\n    \"desc\": \"Wonder Woman is a compassionate caring, stubborn, opinionated, highly competitive, outgoing, immortal Amazon. Wonder Woman is a warrior born. She tries to avoid conflict but if pressed she will engage in battle and on occasion lose herself in the pleasure of battle.\",\r\n    \"dateShow\": \"2018-12-30 14:20:00\",\r\n    \"isSpecial\":true,\r\n    \"isPremiere\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/movies/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"movies",
+										""
+									]
+								},
+								"description": "**Description:** This api is used for admin to create new movie\n\n**Requirements:** Admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete movie",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token for authen and authorize\n(Expire in 1 hour)",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/movies/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"movies",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific movie\n\n**Requirements:** movie Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update movie",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token for authen and authorize\n(Expire in 1 hour)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Wonder Woman 1976\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/movies/7",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"movies",
+										"7"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific movie\n\n**Requirements:** movie Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get upcoming movie list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/upcoming",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"upcoming"
+							]
+						},
+						"description": "**Description:** This api is used for to get all upcoming movies\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Get current movie list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/current",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"current"
+							]
+						},
+						"description": "**Description:** This api is used for to get all current movies\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Get special movie list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/special",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"special"
+							]
+						},
+						"description": "**Description:** This api is used for to get all special movies\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Get cinema list by movie",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movieId\": 1\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/get-cinemas",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"get-cinemas"
+							]
+						},
+						"description": "**Description:** This api is used for user to find all cinemas that show a specific movie\n\n**Requirements:** movie Id\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Get days by cinema and movie",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movieId\": 1,\r\n    \"cinemaId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/get-days",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"get-days"
+							]
+						},
+						"description": "**Description:** This api is used for user to find all the available days of a particular movie and cinema\n\n**Requirements:** movie Id, cinema Id\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Get showtimes by day",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movieId\": \"1\",\r\n    \"cinemaId\": \"1\",\r\n    \"date\": \"19-06-2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/movies/get-showtimes",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"movies",
+								"get-showtimes"
+							]
+						},
+						"description": "**Description:** This api is used for user to find all showtimes of a specific movie, cinema and day\n\n**Requirements:** movie Id, cinema Id, date\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cineplex (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get cineplex list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MTUxMzExLCJleHAiOjE2MzkxOTQ1MTF9.DAH4nuMceDoGTUrgf2Ci50nZzEfoAjY2UdfxiHTayNI",
+										"description": "admin token for authorize and authen",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cineplexes",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cineplexes"
+									]
+								},
+								"description": "**Description:** This api is used to get all cineplexes\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get cineplex detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MTUxMzExLCJleHAiOjE2MzkxOTQ1MTF9.DAH4nuMceDoGTUrgf2Ci50nZzEfoAjY2UdfxiHTayNI",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cineplexes/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cineplexes",
+										""
+									]
+								},
+								"description": "**Description:** This api is used to get a specific cineplex\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update cineplex",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"logo\":\"hinh logo 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cineplexes/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cineplexes",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific cineplex\n\n**Requirements:** cineplex Id, admin token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload cineplex",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"CNS\",\r\n    \"logo\":\"link hinh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cineplexes",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cineplexes"
+									]
+								},
+								"description": "**Description:** This api is used for admin to create new cineplex\n\n**Requirements:** admin token in header\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete cineplex",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cineplexes/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cineplexes",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific cineplex\n\n**Requirements:** cineplex Id, admin token in header\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cinema (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Upload cinema",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjY2NTI0LCJleHAiOjE2NDI3MDk3MjR9.OW671fIJ6sSnFPhUeDqcIZ7yO8NRt-JAGHKK9EyWzbE",
+										"description": "admin token for authen and authorize",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"CNS Bình Dương\",\r\n    \"address\": \"1 Đ. Phú Lợi, Phú Hoà, Thủ Dầu Một, Bình Dương\",\r\n    \"image\": \"link hình\",\r\n    \"cineplexId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinemas/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinemas",
+										""
+									]
+								},
+								"description": "**Description:** This api is used for admin to create new cinema\n\n**Requirements:** Admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get List Cinema",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinemas/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinemas",
+										""
+									]
+								},
+								"description": "**Description:** This api is used to get all cinemas\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get cinema detail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinemas/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinemas",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to get information of a specific cinema\n\n**Requirements:** cinema Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update cinema",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNTgxNjMyLCJleHAiOjE2NDI2MjQ4MzJ9.tm0dC8-FfFU1uxVZheai5_JhRoBuwLaIz7aJ6Xuo2Do",
+										"description": "admin token for authen and authorize",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image\": \"link hinh 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinemas/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinemas",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific cinema\n\n**Requirements:** Admin access token, cinema Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete cinema",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjY2NTI0LCJleHAiOjE2NDI3MDk3MjR9.OW671fIJ6sSnFPhUeDqcIZ7yO8NRt-JAGHKK9EyWzbE",
+										"description": "admin token for authen and authorize",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinemas/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinemas",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific cinema\n\n**Requirements:** Admin access token, cinema Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "seat (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get seat list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token for authorize and authen",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/seats",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"seats"
+									]
+								},
+								"description": "**Description:** This api is used to get all seats\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get seat detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/seats/4",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"seats",
+										"4"
+									]
+								},
+								"description": "**Description:** This api is used to get a specific seat by id\n\n**Requirements:** seat Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload seat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"20G\",\r\n    \"status\":false,\r\n    \"price\": 400000,\r\n    \"type\": \"Ghế đơn\",\r\n    \"showtimeId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/seats",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"seats"
+									]
+								},
+								"description": "**Description:** This api is used for admin to create new seat\n\n**Requirements:** Admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update seat",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"status\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/seats/17",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"seats",
+										"17"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific seat\n\n**Requirements:** Admin access token, seat Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete seat",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/seats/12",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"seats",
+										"12"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific seat\n\n**Requirements:** Admin access token, seat Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Book Seat",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seatId\": 12,\r\n    \"showtimeId\": 3\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/seats/book-seat",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"seats",
+								"book-seat"
+							]
+						},
+						"description": "**Description:** This api is used to get book a seat\n\n**Requirements:** showtime Id, seat id\n\n**Usage:** copy and paste the api to use"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "showtime (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get showtime list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token for authorize and authen",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/showtimes",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"showtimes"
+									]
+								},
+								"description": "**Description:** This api is used to get all showtimes\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get showtime detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/showtimes/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"showtimes",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used to get a specific showtime\n\n**Requirements:** showtime Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload showtime",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startTime\": \"2021-06-19 23:30:30\",\r\n    \"cinemaId\": 1,\r\n    \"movieId\": 1\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/showtimes/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"showtimes",
+										""
+									]
+								},
+								"description": "**Description:** This api is used for admin to create a new showtime\n\n**Requirements:** admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update showtime",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"startTime\":\"2021-06-19 10:30:26\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/showtimes/3",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"showtimes",
+										"3"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific showtime\n\n**Requirements:** showtime Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete showtime",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/showtimes/11",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"showtimes",
+										"11"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific showtime\n\n**Requirements:** showtime Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all seats by showtime",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"showtimeId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/showtimes/seats-by-showtime",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"showtimes",
+								"seats-by-showtime"
+							]
+						},
+						"description": "**Description:** This api is used to get all seats of a specific showtime\n\n**Requirements:** showtime Id\n\n**Usage:** copy and paste the api to use"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth (completed)",
+			"item": [
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\": \"s1m@gmail.com\",\r\n        \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/sign-in",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-in"
+							]
+						},
+						"description": "**Description:** This api is used for registered user to log in\n\n**Requirements:** Require an email and password value\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"NguyenVanA\",\r\n    \"email\": \"NguyenVanA@gmail.com\",\r\n    \"password\": \"Aqua270120\",\r\n    \"phone\": \"0911223344\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/sign-up",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-up"
+							]
+						},
+						"description": "**Description:** This api is used for new user to register\n\n**Requirements:** Name,email,password fields are required\n\n**Usage:** Copy and paste the api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"email\": \"NguyenVanA@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/reset-password",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						},
+						"description": "**Description:** This api is used for user to reset their password. Default password is: \"123456\"\n\n**Requirements:** user email\n\n**Usage:** Copy and paste the api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Facebook Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"EAADBFqeLzjUBAH5ETGBDedNvi5FGGgcTpapJNGNcEQN9K69JOGll3rCI1ZAClaDMYNx94jnKZCSb34DIXmZCCyKfWwKZBjqnLp0JCcmVj9Mk8lilh0wj3ssQjijLSpM16c4sMUJZA1t9fZCFU0E6qZCN5HjhZCaUKUfH0PW1J9ZCUEwZDZD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/facebook-login",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"facebook-login"
+							]
+						},
+						"description": "**Description:** This api implement facebook login for new user to register\n\n**Requirements:** Facebook Development access token\n\n**Usage:** Copy and paste to use\n\n**This access token valid until 19 of March 2022**"
+					},
+					"response": []
+				},
+				{
+					"name": "Email Sending",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nguyenlehb1808@gmail.com\",\r\n    \"subject\": \"testing testing\",\r\n    \"text\": \"hom nay buu thich an cuc cham muoi tieu lam huhu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/email-sending",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"email-sending"
+							]
+						},
+						"description": "**Description:** This api is used to to send a notification email via sendgrid. Can be used to inform user by sending an email after they have successfully register\n\n**Requirements:** User email, subject and text\n\n**Usage:** Copy and paste api to use"
+					},
+					"response": []
+				},
+				{
+					"name": "Google Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/auth/google-login/",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"google-login",
+								""
+							]
+						},
+						"description": "**Description:** This api implements Google Login for new user to register\n\n**Requirements:** none\n\n**Usage:** Copy and paste this api to **Google search bar** to use because it needs google form to connect with google accouunt"
+					},
+					"response": []
+				},
+				{
+					"name": "Google Login Using PostMan",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "https://www.googleapis.com/auth/gmail.modify",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "Google",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "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",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "287294331873-c7hnmofc9gpuec8720n2enl5erkdm6ea.apps.googleusercontent.com",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://accounts.google.com/o/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://accounts.google.com/o/oauth2/auth",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gmail.googleapis.com/gmail/v1/users/{{userId}}/profile",
+							"protocol": "https",
+							"host": [
+								"gmail",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"gmail",
+								"v1",
+								"users",
+								"{{userId}}",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tickets (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get ticket list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token for authorize and authen",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/tickets",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"tickets"
+									]
+								},
+								"description": "**Description:** This api is used to get all tickets\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get ticket detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/tickets/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"tickets",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used to get a specific ticket\n\n**Requirements:** new Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload ticket",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 2,\r\n    \"movieId\":2\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/tickets/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"tickets",
+										""
+									]
+								},
+								"description": "**Description:** This api is used for admin to create a new ticket\n\n**Requirements:** admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update ticket",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"userId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/tickets/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"tickets",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific ticket\n\n**Requirements:** ticket Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete ticket",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/tickets/7",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"tickets",
+										"7"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a specific ticket\n\n**Requirements:** ticket id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all seats by showtime",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "newsImg",
+									"type": "file",
+									"src": "9WlFjeeqp/Screenshot (657).png"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{nodejs18Domain}}api/v1/news/upload-news-picture/1",
+							"host": [
+								"{{nodejs18Domain}}api"
+							],
+							"path": [
+								"v1",
+								"news",
+								"upload-news-picture",
+								"1"
+							]
+						},
+						"description": "**Description:** This api is used to upload an image for a specific news\n\n**Requirements:** news Id, file\n\n**Usage:** copy and paste the api to use"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cinema Movie (completed)",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get Cinema movie list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token for authorize and authen",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinema_movie",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinema_movie"
+									]
+								},
+								"description": "**Description:** This api is used to get all cinema movie\n\n**Requirements:** None\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Get cinema movie detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjM5MjMwOTQ3LCJleHAiOjE2MzkyNzQxNDd9.2Id5wEL-xwtyTjI2nNtV8i-tBkG98mutkVCvAwMnY9Y",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinema_movie/2",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinema_movie",
+										"2"
+									]
+								},
+								"description": "**Description:** This api is used to get a specific cinema movie\n\n**Requirements:** new Id\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Upload cinema movie",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cinemaId\": 2,\r\n    \"movieId\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinema_movie/",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinema_movie",
+										""
+									]
+								},
+								"description": "**Description:** This api is used for admin to create a new cinema movie\n\n**Requirements:** admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Update cinea movie",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"cinemaId\":3,\r\n        \"movieId\": 2\r\n        \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinema_movie/6",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinema_movie",
+										"6"
+									]
+								},
+								"description": "**Description:** This api is used for admin to update a specific cinema movie\n\n**Requirements:** cinema movie Id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete cineam movie",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzMW1AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjQyNjkyNTA1LCJleHAiOjE2NDI3MzU3MDV9.zwZ2VABEC8cxAROC2SOvhGEbCSg2BGVviHp_wgzKPKs",
+										"description": "admin token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{nodejs18Domain}}api/v1/cinema_movie/6",
+									"host": [
+										"{{nodejs18Domain}}api"
+									],
+									"path": [
+										"v1",
+										"cinema_movie",
+										"6"
+									]
+								},
+								"description": "**Description:** This api is used for admin to delete a cinema movie\n\n**Requirements:** cinema movie id, admin access token\n\n**Usage:** Copy and paste api to use"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "nodejs18Domain",
+			"value": "http://localhost:7000/"
+		},
+		{
+			"key": "userId",
+			"value": "nguyenlehb1808@gmail.com"
+		}
+	]
+}
