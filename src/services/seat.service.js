@@ -1,6 +1,18 @@
 const { Seat, bookedSeat, Showtime } = require("../models");
 const { constants } = require("../utils/constants");
 
+const uploadSeat = async (body) => {
+  const { name, showtimeId } = body;
+
+  const isExisted = await Seat.findOne({ where: { name, showtimeId } });
+
+  if (isExisted) throw new Error(constants.Errors.ExistedData);
+
+  const result = await Seat.create(body);
+
+  return result;
+};
+
 const bookSeat = async (seatId, showtimeId) => {
   const bookSeat = await Seat.findOne({
     where: {
@@ -9,12 +21,11 @@ const bookSeat = async (seatId, showtimeId) => {
     },
   });
 
-  const checkBookSeatExist = await bookedSeat.findOne({
+  const isExisted = await bookedSeat.findOne({
     where: { showtimeId, seatId },
   });
-
-  if (checkBookSeatExist || bookSeat.status)
-    throw new Error(constants.Errors.BadRequest);
+  if (isExisted || bookSeat.status)
+    throw new Error(constants.Errors.ExistedData);
 
   await bookedSeat.create({ seatId, showtimeId });
 
@@ -33,6 +44,7 @@ const bookSeat = async (seatId, showtimeId) => {
 
 const seatService = {
   bookSeat,
+  uploadSeat,
 };
 
 module.exports = { seatService };

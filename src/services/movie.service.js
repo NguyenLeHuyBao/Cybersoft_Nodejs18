@@ -4,6 +4,54 @@ const { constants } = require("../utils/constants");
 var moment = require("moment");
 moment().format();
 
+const uploadMovie = async (body) => {
+  const { name } = body;
+
+  const existedMovie = await Movie.findOne({ where: { name } });
+
+  if (existedMovie) throw new Error(constants.Errors.ExistedData);
+
+  const result = await Movie.create(body);
+
+  return result;
+};
+
+const getUpcomingMovie = async () => {
+  const result = await Movie.findAll({
+    where: {
+      isPremiere: true,
+    },
+  });
+
+  if (!result) throw new Error(constants.Errors.BadRequest);
+
+  return result;
+};
+
+const getCurrentMovie = async () => {
+  const result = await Movie.findAll({
+    where: {
+      isPremiere: false,
+    },
+  });
+
+  if (!result) throw new Error(constants.Errors.BadRequest);
+
+  return result;
+};
+
+const getSpecialMovie = async () => {
+  const result = await Movie.findAll({
+    where: {
+      isSpecial: true,
+    },
+  });
+
+  if (!result) throw new Error(constants.Errors.BadRequest);
+
+  return result;
+};
+
 const getCinemaListByMovie = async (movieId) => {
   let cinemaList = await Movie.findOne({
     attributes: {
@@ -22,6 +70,7 @@ const getCinemaListByMovie = async (movieId) => {
       id: movieId,
     },
   });
+
   if (!cinemaList) throw new Error(constants.Errors.BadRequest);
 
   cinemaList = cinemaList.Cinemas.map((cinema, index) => {
@@ -32,6 +81,7 @@ const getCinemaListByMovie = async (movieId) => {
       image: cinema.image,
     };
   });
+
   return cinemaList;
 };
 
@@ -56,6 +106,7 @@ const getDaysByCinema = async (movieId, cinemaId) => {
   const uniqueListDay = listDays.filter((element, index) => {
     return listDays.indexOf(element) === index;
   });
+
   return uniqueListDay;
 };
 
@@ -80,10 +131,15 @@ const getTimeListByDay = async (day, movieId, cinemaId) => {
   });
   return uniqueListTime;
 };
+
 const movieService = {
   getCinemaListByMovie,
   getDaysByCinema,
   getTimeListByDay,
+  uploadMovie,
+  getUpcomingMovie,
+  getCurrentMovie,
+  getSpecialMovie,
 };
 
 module.exports = {

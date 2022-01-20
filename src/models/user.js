@@ -4,7 +4,10 @@ const { hashPassGenerate } = require("../utils/hashPassGenerate");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      this.belongsToMany(models.Movie, { through: models.Ticket });
+      this.belongsToMany(models.Movie, {
+        through: models.Ticket,
+        foreignKey: "userId",
+      });
     }
   }
   User.init(

@@ -9,7 +9,14 @@ const findAllUser = adminTaskHelper.getAllTask(User);
 
 const findDetailUser = adminTaskHelper.getDetailTask(User);
 
-const createUser = adminTaskHelper.uploadTask(User);
+const createUser = async (req, res) => {
+  try {
+    const result = await userService.createUser(req.body);
+    res.status(201).send({ message: constants.Success.UploadTask, result });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 
 const updateUser = adminTaskHelper.updateTask(User);
 

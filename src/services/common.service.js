@@ -45,7 +45,7 @@ const deleteTask = (Model) => async (req, res) => {
 const uploadTask = (Model) => async (req, res) => {
   try {
     const result = await Model.create(req.body);
-    res.status(201).send({ message: constants.Success.UpdateTask, result });
+    res.status(201).send({ message: constants.Success.UploadTask, result });
   } catch (error) {
     res.status(500).send(error.toString());
   }

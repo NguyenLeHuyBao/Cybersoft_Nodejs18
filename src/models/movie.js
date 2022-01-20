@@ -8,16 +8,17 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "movieId",
       });
 
-      // this.hasMany(models.Cinema_movie, { foreignKey: "movieId" });
-
-      this.belongsToMany(models.User, { through: models.Ticket });
+      this.belongsToMany(models.User, {
+        through: models.Ticket,
+        foreignKey: "movieId",
+      });
 
       this.hasMany(models.Showtime, { foreignKey: "movieId" });
     }
   }
   Movie.init(
     {
-      name: DataTypes.STRING,
+      name: { type: DataTypes.STRING, unique: true },
       alias: DataTypes.STRING,
       poster: DataTypes.STRING,
       trailer: DataTypes.STRING,

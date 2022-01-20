@@ -3,6 +3,17 @@ const { User } = require("../models");
 const { cloudinary } = require("../utils/cloudinary");
 const { constants } = require("../utils/constants");
 
+const createUser = async (body) => {
+  const { email } = body;
+
+  const existedUser = await User.findOne({ where: { email } });
+  if (existedUser) throw new Error(constants.Errors.ExistedData);
+
+  const result = await User.create(body);
+
+  return result;
+};
+
 const uploadAvatar = async (user, file) => {
   const result = await cloudinary.uploader.upload(file.path, {
     use_filename: true,
@@ -27,6 +38,7 @@ const uploadAvatar = async (user, file) => {
 
 const userService = {
   uploadAvatar,
+  createUser,
 };
 
 module.exports = {

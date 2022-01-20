@@ -8,6 +8,8 @@ const { cineplexRouter } = require("./cineplex.router");
 const { seatRouter } = require("./seat.router");
 const { showtimeRouter } = require("./showtime.router");
 const { newsRouter } = require("./news.router");
+const { ticketRouter } = require("./ticket.router");
+const { CinemaMovie } = require("./cinema_movie.router");
 const { graphqlRouter } = require("./graphql.router");
 
 // http://localhost:7000/api/v1/users
@@ -26,6 +28,10 @@ rootRoutter.use("/seats", seatRouter);
 rootRoutter.use("/showtimes", showtimeRouter);
 // http://localhost:7000/api/v1/news
 rootRoutter.use("/news", newsRouter);
+// http://localhost:7000/api/v1/tickets
+rootRoutter.use("/tickets", ticketRouter);
+// http://localhost:7000/api/v1/cinema_movie
+rootRoutter.use("/cinema_movie", CinemaMovie);
 // http://localhost:7000/api/v1/graphql
 rootRoutter.use("/graphql", graphqlRouter);
 module.exports = {

@@ -13,7 +13,7 @@ const signIn = async (email, password) => {
     },
   });
 
-  if (!user) throw new Error(constants.Errors.BadRequest);
+  if (!user) throw new Error(constants.Errors.BadCredential);
 
   const isAuth = bcryptjs.compareSync(password, user.password);
 

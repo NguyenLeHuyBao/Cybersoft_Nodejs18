@@ -49,14 +49,13 @@ userRouter.post(
 userRouter.put(
   "/:id",
   [authenticate, authorize("ADMIN", "SUPER_ADMIN"), checkExist(User)],
-  [checkExist(User)],
   updateUser
 );
 
 // DELETE http://localhost:7000/api/v1/users
 userRouter.delete(
   "/:id",
-  // [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],
+  [authenticate, authorize(["ADMIN", "SUPER_ADMIN"]), checkExist(User)],
   removeUser
 );
 

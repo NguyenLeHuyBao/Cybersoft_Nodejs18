@@ -1,16 +1,25 @@
-const { Movie, Cinema, Showtime, Cineplex } = require("../models");
+var moment = require("moment");
+
+const { Movie } = require("../models");
 
 const { adminTaskHelper } = require("../services/common.service");
 const { movieService } = require("../services/movie.service");
+const { constants } = require("../utils/constants");
 
-var moment = require("moment"); // require
 moment().format();
 
 const getAllMovie = adminTaskHelper.getAllTask(Movie);
 
 const getMovieDetail = adminTaskHelper.getDetailTask(Movie);
 
-const uploadMovie = adminTaskHelper.uploadTask(Movie);
+const uploadMovie = async (req, res) => {
+  try {
+    const result = await movieService.uploadMovie(req.body);
+    res.status(201).send({ message: constants.Success.UpdateTask, result });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 
 const updateMovie = adminTaskHelper.updateTask(Movie);
 
@@ -18,44 +27,32 @@ const deleteMovie = adminTaskHelper.deleteTask(Movie);
 
 const getUpcomingMovie = async (req, res) => {
   try {
-    const upcomingMovieList = await Movie.findAll({
-      where: {
-        isPremiere: true,
-      },
-    });
+    const upcomingMovieList = await movieService.getUpcomingMovie();
     res
       .status(200)
-      .send({ message: "Get upcoming movie list success", upcomingMovieList });
+      .send({ message: constants.Success.UpcomingMovies, upcomingMovieList });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error.message);
   }
 };
 
 const getCurrentMovie = async (req, res) => {
   try {
-    const currentMovieList = await Movie.findAll({
-      where: {
-        isPremiere: false,
-      },
-    });
+    const currentMovieList = await movieService.getCurrentMovie();
     res
       .status(200)
-      .send({ message: "Get current movie list success", currentMovieList });
+      .send({ message: constants.Success.CurrentMovies, currentMovieList });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).send(error.message);
   }
 };
 
 const getSpecialMovie = async (req, res) => {
   try {
-    const specialMovieList = await Movie.findAll({
-      where: {
-        isSpecial: true,
-      },
-    });
+    const specialMovieList = await movieService.getSpecialMovie();
     res
       .status(200)
-      .send({ message: "Get special movie list success", specialMovieList });
+      .send({ message: constants.Success.SpecialMovies, specialMovieList });
   } catch (error) {
     res.status(500).send({ error });
   }
