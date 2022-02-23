@@ -23,6 +23,7 @@ const Success = {
   SpecialMovies: "Successfully get Special movies",
   SeatsByShowtime: "Successfully get list seats by showtime",
 };
+
 const constants = {
   Errors,
   Success,
