@@ -20,7 +20,15 @@ const createUser = async (req, res) => {
 
 const updateUser = adminTaskHelper.updateTask(User);
 
-const removeUser = adminTaskHelper.deleteTask(User);
+// const removeUser = adminTaskHelper.deleteTask(User);
+const removeUser = async (req, res) => {
+  try {
+    const result = await userService.deleteUser(req.params.id);
+    res.status(200).send({ message: constants.Success.DeleteTask, result });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 
 const uploadAvatar = async (req, res) => {
   try {

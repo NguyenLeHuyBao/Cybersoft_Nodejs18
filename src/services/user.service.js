@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Ticket } = require("../models");
 
 const { cloudinary } = require("../utils/cloudinary");
 const { constants } = require("../utils/constants");
@@ -14,6 +14,22 @@ const createUser = async (body) => {
   const result = await User.create(body);
 
   return result;
+};
+
+const deleteUser = async (userId) => {
+  const existedUser = await User.findOne({ where: { id: userId } });
+
+  if (!existedUser) throw new Error(constants.Errors.InvalidId);
+
+  const existedTickets = await Ticket.findAll({ where: { userId } });
+
+  if (existedTickets) {
+    await Ticket.destroy({ where: { userId: userId } });
+  }
+
+  await User.destroy({ where: { id: userId } });
+
+  return existedUser;
 };
 
 const uploadAvatar = async (user, file) => {
@@ -41,6 +57,7 @@ const uploadAvatar = async (user, file) => {
 const userService = {
   uploadAvatar,
   createUser,
+  deleteUser,
 };
 
 module.exports = {
