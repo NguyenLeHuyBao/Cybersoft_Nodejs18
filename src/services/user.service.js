@@ -6,7 +6,9 @@ const { constants } = require("../utils/constants");
 const createUser = async (body) => {
   const { email } = body;
 
-  const existedUser = await User.findOne({ where: { email } });
+  const existedUser = await User.findOne({
+    where: { email },
+  });
   if (existedUser) throw new Error(constants.Errors.ExistedData);
 
   const result = await User.create(body);

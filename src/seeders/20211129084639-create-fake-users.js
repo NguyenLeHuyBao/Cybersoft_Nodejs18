@@ -1,5 +1,6 @@
 "use strict";
 const bcryptjs = require("bcryptjs");
+
 const fakeUserList = [
   {
     id: 1,
@@ -45,6 +46,7 @@ const createFakeUser = (listUser) => {
   });
   return fakeUserData;
 };
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert("Users", createFakeUser(fakeUserList), {});
